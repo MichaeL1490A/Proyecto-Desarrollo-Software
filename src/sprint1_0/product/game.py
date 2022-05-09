@@ -1,5 +1,7 @@
-import pygame
+import pygame, sys
 from board import *
+sys.path.append('C:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software')
+
 #PRUEBA
 SCREEN_WIDTH = 1020
 SCREEN_HEIGHT = 1020
