@@ -1,26 +1,12 @@
 import pygame, sys
 from board import *
+from constants import *
+from ficha import *
 sys.path.append('C:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software')
 
-#PRUEBA
-SCREEN_WIDTH = 1020
-SCREEN_HEIGHT = 1020
-WHITE = (255,255,255)
-BLACK = (0,0,0)
+
 #asdsa
 
-
-#CLASE FICHA
-class Ficha(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load("player.png").convert()
-        self.image.set_colorkey(BLACK)
-        self.rect = self.image.get_rect()
-    def move(self):
-        mouse_pos = pygame.mouse.get_pos()
-        self.rect.x = mouse_pos[0]
-        self.rect.y = mouse_pos[1]
 
 #CLASE JUEGO
 class Game(object):
