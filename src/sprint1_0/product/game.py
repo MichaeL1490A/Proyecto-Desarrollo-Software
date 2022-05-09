@@ -1,17 +1,12 @@
 import pygame
-
+from board import *
 #PRUEBA
 SCREEN_WIDTH = 1020
 SCREEN_HEIGHT = 1020
 WHITE = (255,255,255)
 BLACK = (0,0,0)
 #asdsa
-#CLASE TABLA
-class Table(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pygame.image.load("table.jpeg").convert()
-        self.rect = self.image.get_rect()
+
 
 #CLASE FICHA
 class Ficha(pygame.sprite.Sprite):
