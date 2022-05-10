@@ -10,10 +10,9 @@ def main():
     game = Game(screen)
     while not done:
         done = game.process_events()
-        game.display_frame(screen)
+        game.update()
         clock.tick(60)
     pygame.quit()
 
 if __name__ == "__main__":
     main()
-    
