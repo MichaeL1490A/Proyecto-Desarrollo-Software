@@ -1,5 +1,5 @@
 import pygame
-from constants import *
+from constants import SIZE
 #CLASE FICHA
 class Ficha():
     def __init__(self,fil,col,color):
@@ -8,3 +8,11 @@ class Ficha():
         self.color = color 
         self.x = 0
         self.y = 0
+        self.calcular_posicion()
+    #Calcula la posicion en la pantalla
+    def calcular_posicion(self):
+        self.x = SIZE * self.col + SIZE//2
+        self.y = SIZE * self.fil + SIZE//2
+
+    def draw(self,screen):
+        pygame.draw.circle(screen,self.color,(self.x,self.y),10)
