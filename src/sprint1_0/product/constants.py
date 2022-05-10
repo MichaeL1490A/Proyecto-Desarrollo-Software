@@ -9,6 +9,7 @@ screen = pygame.display.set_mode([SCREEN_WIDTH,SCREEN_HEIGHT])
 WHITE = (255,255,255)
 BLACK = (0,0,0)
 BROWN = (115,0,0)
+GREY = (128,128,128)
 tablita =[
             [True,False,False,True,False,False,True],
             [False,True,False,True,False,True,False],
