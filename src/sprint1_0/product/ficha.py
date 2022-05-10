@@ -19,3 +19,5 @@ class Ficha():
         self.fil = fil
         self.col = col 
         self.calcular_posicion()
+    def __repr__(self):
+        return str(self.color)

@@ -51,7 +51,7 @@ class Game():
                         ficha = Ficha(fil,col,self.turn)
                         self.table.board[fil][col]=ficha
                         self.cambiar_turno()
-                        print(self.contador)
                         self.contador = self.contador +1 #Numero de fichas
+                        self.table.verificar_molino()
         return False
     
