@@ -1,9 +1,9 @@
 import pygame
 #Dimensiones del programa
-SCREEN_WIDTH = 1020
-SCREEN_HEIGHT = 1020
+SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 1000
 FIL,COL=7,7
-SIZE = SCREEN_WIDTH//COL
+SIZE = (SCREEN_WIDTH)//COL
 screen = pygame.display.set_mode([SCREEN_WIDTH,SCREEN_HEIGHT])
 #Colores
 WHITE = (255,255,255)
