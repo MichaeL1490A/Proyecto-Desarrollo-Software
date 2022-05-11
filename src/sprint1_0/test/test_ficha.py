@@ -1,6 +1,7 @@
-import unittest
-from sprint1_0.product.constants import *
-from sprint1_0.product.ficha import *
+import unittest, sys
+sys.path.append("..")
+from product.constants import SIZE,GREY
+from product.ficha import Ficha
 
 class TestFicha(unittest.TestCase):
     def test_calcular_posicion(self):
