@@ -41,6 +41,7 @@ class Table():
                                          // 2, 5*SIZE-SIZE//2, width_line, SIZE*2))
 
     # Pinta la pantalla
+
     def draw_screen(self, screen):
         self.draw_lines(screen)
         self.draw_box(screen)

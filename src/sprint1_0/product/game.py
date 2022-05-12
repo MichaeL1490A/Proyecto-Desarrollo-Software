@@ -1,7 +1,7 @@
 import pygame
 import sys
 from table import Table
-from constants import BROWN, WHITE, GREY, screen, SIZE, valid_boxes
+from constants import BROWN, BLACK, GREY, screen, SIZE, valid_boxes, COLOR_TABLE
 from ficha import Ficha
 
 sys.path.append(
@@ -27,6 +27,7 @@ class Game():
         self.contador = 0
         # self.ficha = Ficha(1,1,BROWN) #PRUEBA
         self.turn = GREY
+        self.player = "1"
 
     def update(self):
         self.table.draw_screen(screen)
@@ -36,8 +37,10 @@ class Game():
     def cambiar_turno(self):
         if self.turn == GREY:
             self.turn = BROWN
+            self.player = "2"
         else:
             self.turn = GREY
+            self.player = "1"
 
     def colocar_ficha(self, fil, col):
         if valid_boxes[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
@@ -47,8 +50,17 @@ class Game():
             self.contador = self.contador + 1  # Numero de fichas
             self.table.check_mill()
 
+    def turn_text(self):
+        # Muestra en texto al jugador que le toca
+        font = pygame.font.SysFont("serif", 20)
+        text = font.render("JUGADOR "+self.player, True, BLACK)
+        center_x = SIZE*3+SIZE//2 - text.get_width()//2
+        center_y = 20 - text.get_height()//2
+        screen.blit(text, [center_x, center_y])
+
     def process_events(self, screen):
-        screen.fill(BROWN)
+        screen.fill(COLOR_TABLE)
+        self.turn_text()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return True
@@ -74,4 +86,5 @@ class Game():
                         self.table.verificar_molino()'''
                 # Implementacion de movimiento
                 # if valid_boxes[fil][col] == True and self.table.board[fil][col] != 0  and self.contador >= 18 and self.:
+
         return False

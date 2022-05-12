@@ -9,9 +9,10 @@ screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
 # Colors
 WHITE = (255, 255, 255)
-GREY = (87, 83, 72)
-BROWN = (247, 205, 102)
+GREY = (85, 81, 70)
+BROWN = (240, 240, 240)
 BLACK = (0, 0, 0)
+COLOR_TABLE = (247, 205, 102)
 
 #
 valid_boxes = [
