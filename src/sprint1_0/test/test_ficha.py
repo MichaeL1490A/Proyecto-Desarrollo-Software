@@ -1,4 +1,5 @@
-import unittest, sys
+import unittest
+import sys
 sys.path.append("..")
 from product.constants import SIZE,GREY
 from product.ficha import Ficha

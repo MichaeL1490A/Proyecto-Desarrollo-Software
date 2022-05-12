@@ -1,5 +1,5 @@
 import pygame
-from constants import tablita,WHITE,SIZE,GREY,BROWN
+from product.constants import tablita,WHITE,SIZE,GREY,BROWN
 class Table():
     def __init__(self):
         self.board = [] # Fichas en juego
@@ -22,30 +22,46 @@ class Table():
         #Horizontal
         if (self.board[0][0].__repr__() == str(GREY) and self.board[0][3].__repr__() == str(GREY) and self.board[0][6].__repr__() == str(GREY)) or (self.board[0][0].__repr__() == str(BROWN) and self.board[0][3].__repr__() == str(BROWN) and self.board[0][6].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if (self.board[1][1].__repr__() == str(GREY) and self.board[1][3].__repr__() == str(GREY) and self.board[1][5].__repr__() == str(GREY)) or (self.board[1][1].__repr__() == str(BROWN) and self.board[1][3].__repr__() == str(BROWN) and self.board[1][5].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if (self.board[2][2].__repr__() == str(GREY) and self.board[2][3].__repr__() == str(GREY) and self.board[2][4].__repr__() == str(GREY)) or (self.board[2][2].__repr__() == str(BROWN) and self.board[2][3].__repr__() == str(BROWN) and self.board[2][4].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if ((self.board[3][0].__repr__() == str(GREY) and self.board[3][1].__repr__() == str(GREY) and self.board[3][2].__repr__() == str(GREY)) or (self.board[3][4].__repr__() == str(GREY) and self.board[3][5].__repr__() == str(GREY) and self.board[3][6].__repr__() == str(GREY))) or ((self.board[3][0].__repr__() == str(BROWN) and self.board[3][1].__repr__() == str(BROWN) and self.board[3][2].__repr__() == str(BROWN)) or (self.board[3][4].__repr__() == str(BROWN) and self.board[3][5].__repr__() == str(BROWN) and self.board[3][6].__repr__() == str(BROWN))):
             print("Molino")
+            return True
         if (self.board[4][2].__repr__() == str(GREY) and self.board[4][3].__repr__() == str(GREY) and self.board[4][4].__repr__() == str(GREY)) or (self.board[4][2].__repr__() == str(BROWN) and self.board[4][3].__repr__() == str(BROWN) and self.board[4][4].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if (self.board[5][1].__repr__() == str(GREY) and self.board[5][3].__repr__() == str(GREY) and self.board[5][5].__repr__() == str(GREY)) or (self.board[5][1].__repr__() == str(BROWN) and self.board[5][3].__repr__() == str(BROWN) and self.board[5][5].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if (self.board[6][0].__repr__() == str(GREY) and self.board[6][3].__repr__() == str(GREY) and self.board[6][6].__repr__() == str(GREY)) or (self.board[6][0].__repr__() == str(BROWN) and self.board[6][3].__repr__() == str(BROWN) and self.board[6][6].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         #Vertical
         if (self.board[0][0].__repr__() == str(GREY) and self.board[3][0].__repr__() == str(GREY) and self.board[6][0].__repr__() == str(GREY)) or (self.board[0][0].__repr__() == str(BROWN) and self.board[3][0].__repr__() == str(BROWN) and self.board[6][0].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if (self.board[1][1].__repr__() == str(GREY) and self.board[3][1].__repr__() == str(GREY) and self.board[5][1].__repr__() == str(GREY)) or (self.board[1][1].__repr__() == str(BROWN) and self.board[3][1].__repr__() == str(BROWN) and self.board[5][1].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if (self.board[2][2].__repr__() == str(GREY) and self.board[3][2].__repr__() == str(GREY) and self.board[4][2].__repr__() == str(GREY)) or (self.board[2][2].__repr__() == str(BROWN) and self.board[3][2].__repr__() == str(BROWN) and self.board[4][2].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if ((self.board[0][3].__repr__() == str(GREY) and self.board[1][3].__repr__() == str(GREY) and self.board[2][3].__repr__() == str(GREY)) or (self.board[4][3].__repr__() == str(GREY) and self.board[5][3].__repr__() == str(GREY) and self.board[6][3].__repr__() == str(GREY))) or ((self.board[0][3].__repr__() == str(BROWN) and self.board[1][3].__repr__() == str(BROWN) and self.board[2][3].__repr__() == str(BROWN)) or (self.board[4][3].__repr__() == str(BROWN) and self.board[5][3].__repr__() == str(BROWN) and self.board[6][3].__repr__() == str(BROWN))):
             print("Molino")
+            return True
         if (self.board[2][4].__repr__() == str(GREY) and self.board[3][4].__repr__() == str(GREY) and self.board[4][4].__repr__() == str(GREY)) or (self.board[2][4].__repr__() == str(BROWN) and self.board[3][4].__repr__() == str(BROWN) and self.board[4][4].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if (self.board[1][5].__repr__() == str(GREY) and self.board[3][5].__repr__() == str(GREY) and self.board[5][5].__repr__() == str(GREY)) or (self.board[1][5].__repr__() == str(BROWN) and self.board[3][5].__repr__() == str(BROWN) and self.board[5][5].__repr__() == str(BROWN)):
             print("Molino")
+            return True
         if (self.board[0][6].__repr__() == str(GREY) and self.board[3][6].__repr__() == str(GREY) and self.board[6][6].__repr__() == str(GREY)) or (self.board[0][6].__repr__() == str(BROWN) and self.board[3][6].__repr__() == str(BROWN) and self.board[6][6].__repr__() == str(BROWN)):
             print("Molino")
+            return True
+        else:
+            return False

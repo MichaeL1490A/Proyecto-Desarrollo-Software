@@ -1,5 +1,5 @@
 import pygame
-from constants import SIZE
+from product.constants import SIZE
 #CLASE FICHA
 class Ficha():
     def __init__(self,fil,col,color):
