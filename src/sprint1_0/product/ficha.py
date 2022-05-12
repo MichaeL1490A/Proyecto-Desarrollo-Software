@@ -1,5 +1,5 @@
 import pygame
-from constants import SIZE
+from product.constants import SIZE
 # CLASE FICHA
 
 

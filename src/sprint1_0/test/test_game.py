@@ -3,7 +3,7 @@ import sys
 
 sys.path.append("..")
 
-from product.constants import GREY
+from product.constants import GREY, BROWN
 from product.game import *
 
 class TestGame(unittest.TestCase):
