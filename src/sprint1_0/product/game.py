@@ -73,5 +73,4 @@ class Game():
                         self.table.verificar_molino()'''
                 # Implementacion de movimiento
                 # if valid_boxes[fil][col] == True and self.table.board[fil][col] != 0  and self.contador >= 18 and self.:
-
         return False
