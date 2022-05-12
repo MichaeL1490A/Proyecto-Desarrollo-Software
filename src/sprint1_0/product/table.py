@@ -1,25 +1,58 @@
 import pygame
-from product.constants import tablita,WHITE,SIZE,GREY,BROWN
+from constants import tablita, BLACK, SIZE, GREY, BROWN
+
+
 class Table():
     def __init__(self):
-        self.board = [] # Fichas en juego
-        self.brown_left = self.white_left = 9 # Numero de fichas que quedan
-    def dibujar_casillas(self,screen):
+        self.board = []  # Fichas en juego
+        self.brown_left = self.white_left = 9  # Numero de fichas que quedan
+
+    # Dibuja las posiciones válidas en el tablero
+    def draw_box(self, screen):
         for fil in range(7):
             self.board.append([])
             for col in range(7):
                 self.board[fil].append(0)
                 if tablita[fil][col] == True:
-                    pygame.draw.circle(screen,WHITE,(fil*SIZE+SIZE//2,col*SIZE+SIZE//2),30)
-    def dibujar(self,screen):
-        self.dibujar_casillas(screen)
+                    pygame.draw.circle(
+                        screen, BLACK, (fil*SIZE + SIZE//2, col*SIZE + SIZE//2), 15)
+
+    # Dibuja las líneas de apoyo en el tablero
+    def draw_lines(self, screen):
+        width_line = 4
+        for column in range(3):
+            pygame.draw.rect(screen, BLACK, (column*SIZE + SIZE
+                                             // 2, column*SIZE + SIZE//2, width_line, SIZE*7 - 2*(column*SIZE + SIZE//2)))
+            pygame.draw.rect(screen, BLACK, (7*SIZE - (1+column)*SIZE+SIZE//2, column
+                                             * SIZE + SIZE//2, width_line, SIZE*7 - 2*(column*SIZE + SIZE//2)))
+        for row in range(3):
+            pygame.draw.rect(screen, BLACK, (row*SIZE + SIZE
+                                             // 2, row*SIZE + SIZE//2, SIZE*7 - 2*(row*SIZE + SIZE//2), width_line))
+            pygame.draw.rect(screen, BLACK, (row*SIZE + SIZE//2, 7*SIZE - (row
+                                             * SIZE + SIZE//2), SIZE*7 - 2*(row*SIZE + SIZE//2), width_line))
+
+        pygame.draw.rect(screen, BLACK, (SIZE//2, SIZE
+                                         * 3 + SIZE//2, SIZE*2, width_line))
+        pygame.draw.rect(screen, BLACK, (SIZE//2+SIZE
+                                         * 4, SIZE*3 + SIZE//2, SIZE*2, width_line))
+        pygame.draw.rect(screen, BLACK, (SIZE*3 + SIZE
+                                         // 2, SIZE//2, width_line, SIZE*2))
+        pygame.draw.rect(screen, BLACK, (SIZE*3 + SIZE
+                                         // 2, 5*SIZE-SIZE//2, width_line, SIZE*2))
+
+    # Pinta la pantalla
+    def draw_screen(self, screen):
+        self.draw_lines(screen)
+        self.draw_box(screen)
         for fil in range(7):
             for col in range(7):
                 ficha = self.board[fil][col]
                 if ficha != 0:
                     ficha.draw(screen)
-    def verificar_molino(self):
-        #Horizontal
+
+    # Revisa si se a formado un molino
+    def check_mill(self):
+        # Horizontal
         if (self.board[0][0].__repr__() == str(GREY) and self.board[0][3].__repr__() == str(GREY) and self.board[0][6].__repr__() == str(GREY)) or (self.board[0][0].__repr__() == str(BROWN) and self.board[0][3].__repr__() == str(BROWN) and self.board[0][6].__repr__() == str(BROWN)):
             print("Molino")
             return True
@@ -41,7 +74,6 @@ class Table():
         if (self.board[6][0].__repr__() == str(GREY) and self.board[6][3].__repr__() == str(GREY) and self.board[6][6].__repr__() == str(GREY)) or (self.board[6][0].__repr__() == str(BROWN) and self.board[6][3].__repr__() == str(BROWN) and self.board[6][6].__repr__() == str(BROWN)):
             print("Molino")
             return True
-        #Vertical
         if (self.board[0][0].__repr__() == str(GREY) and self.board[3][0].__repr__() == str(GREY) and self.board[6][0].__repr__() == str(GREY)) or (self.board[0][0].__repr__() == str(BROWN) and self.board[3][0].__repr__() == str(BROWN) and self.board[6][0].__repr__() == str(BROWN)):
             print("Molino")
             return True
