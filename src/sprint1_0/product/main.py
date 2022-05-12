@@ -1,6 +1,9 @@
-import pygame
-from game import Game
 from constants import *
+from game import Game
+import pygame
+import sys
+sys.path.append(
+    "c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software")
 
 
 def main():

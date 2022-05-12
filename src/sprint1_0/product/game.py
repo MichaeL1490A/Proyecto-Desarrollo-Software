@@ -4,7 +4,8 @@ from table import Table
 from constants import BROWN, WHITE, GREY, screen, SIZE, valid_boxes
 from ficha import Ficha
 
-sys.path.append("..\\..\\Proyecto-Desarrollo-Software")
+sys.path.append(
+    "c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software")
 
 
 def get_row_col_from_mouse(pos):

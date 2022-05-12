@@ -1,9 +1,8 @@
-import unittest
 import sys
-sys.path.append("..")
-from product.constants import SIZE,GREY
-from product.ficha import Ficha
-
+sys.path.append("c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software\\src\\sprint1_0\\product")
+import unittest
+from constants import SIZE,GREY
+from ficha import Ficha
 class TestFicha(unittest.TestCase):
     def test_calcular_posicion(self):
         a = Ficha(3,2,GREY)
