@@ -1,10 +1,10 @@
-import unittest
 import sys
+sys.path.append("c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software\\src\\sprint1_0\\product")
+import unittest
 import pygame
 
-sys.path.append("..")
-from product.table import *
-from product.ficha import Ficha
+from table import *
+from ficha import Ficha
 
 class TestTable(unittest.TestCase):
     def test_molino_True(self):

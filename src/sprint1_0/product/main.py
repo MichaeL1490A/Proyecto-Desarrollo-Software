@@ -1,12 +1,15 @@
-import pygame
-from game import Game
 from constants import *
+from game import Game
+import pygame
+import sys
+sys.path.append(
+    "c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software")
 
 
 def main():
     pygame.init()
     screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
-    done = False 
+    done = False
     clock = pygame.time.Clock()
     game = Game(screen)
     while not done:

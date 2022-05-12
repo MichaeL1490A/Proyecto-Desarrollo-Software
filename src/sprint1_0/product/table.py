@@ -1,5 +1,5 @@
 import pygame
-from product.constants import tablita, BLACK, SIZE, GREY, BROWN
+from constants import tablita, BLACK, SIZE, GREY, BROWN
 
 
 class Table():

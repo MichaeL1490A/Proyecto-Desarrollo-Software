@@ -1,10 +1,11 @@
 import pygame
 import sys
-from product.table import Table
-from product.constants import BROWN, WHITE, GREY, screen, SIZE, tablita
-from product.ficha import Ficha
+from table import Table
+from constants import BROWN, WHITE, GREY, screen, SIZE, tablita
+from ficha import Ficha
 
-sys.path.append("..\\..\\Proyecto-Desarrollo-Software")
+sys.path.append(
+    "c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software")
 
 
 def get_row_col_from_mouse(pos):
@@ -13,7 +14,9 @@ def get_row_col_from_mouse(pos):
     col = (x-SIZE // 2) // SIZE
     return row, col
 
-#CLASE JUEGO
+# CLASE JUEGO
+
+
 class Game():
     def __init__(self, screen):
         self._init()
@@ -36,13 +39,13 @@ class Game():
         else:
             self.turn = GREY
 
-    def colocar_ficha(self,fil,col):
-            if tablita[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
-                ficha = Ficha(fil,col,self.turn)
-                self.table.board[fil][col]=ficha
-                self.cambiar_turno()
-                self.contador = self.contador +1 #Numero de fichas
-                self.table.check_mill()
+    def colocar_ficha(self, fil, col):
+        if tablita[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
+            ficha = Ficha(fil, col, self.turn)
+            self.table.board[fil][col] = ficha
+            self.cambiar_turno()
+            self.contador = self.contador + 1  # Numero de fichas
+            self.table.check_mill()
 
     def process_events(self, screen):
         screen.fill(BROWN)
@@ -61,7 +64,7 @@ class Game():
                 mouse = pygame.mouse.get_pos()
                 fil, col = get_row_col_from_mouse(mouse)
                 if fil >= 0 and col >= 0:
-                    self.colocar_ficha(fil,col)
+                    self.colocar_ficha(fil, col)
                 '''if fil >= 0 and col >= 0:
                     if tablita[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
                         ficha = Ficha(fil, col, self.turn)
@@ -69,8 +72,7 @@ class Game():
                         self.cambiar_turno()
                         self.contador = self.contador +1 #Numero de fichas
                         self.table.verificar_molino()'''
-                    #Implementacion de movimiento
-                    #if tablita[fil][col] == True and self.table.board[fil][col] != 0  and self.contador >= 18 and self.:
+                # Implementacion de movimiento
+                # if tablita[fil][col] == True and self.table.board[fil][col] != 0  and self.contador >= 18 and self.:
 
         return False
-    
