@@ -1,7 +1,8 @@
-import pygame, sys
-from table import Table
-from constants import BROWN,WHITE,GREY,screen,SIZE,tablita
-from ficha import Ficha
+import pygame
+import sys
+from product.table import Table
+from product.constants import BROWN,WHITE,GREY,screen,SIZE,tablita
+from product.ficha import Ficha
 
 sys.path.append("..\\..\\Proyecto-Desarrollo-Software")
 
@@ -10,7 +11,6 @@ def get_row_col_from_mouse(pos):
     row = (y - SIZE //2)//SIZE
     col = (x - SIZE//2)//SIZE
     return row,col
-
 
 #CLASE JUEGO
 class Game():
@@ -47,11 +47,24 @@ class Game():
                 pos = pygame.mouse.get_pos()
                 fil,col = get_row_col_from_mouse(pos)
                 if fil >= 0 and col >= 0:
+                    self.colocar_ficha(fil,col)
+                '''if fil >= 0 and col >= 0:
                     if tablita[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
                         ficha = Ficha(fil,col,self.turn)
                         self.table.board[fil][col]=ficha
                         self.cambiar_turno()
                         self.contador = self.contador +1 #Numero de fichas
-                        self.table.verificar_molino()
+                        self.table.verificar_molino()'''
+                    #Implementacion de movimiento
+                    #if tablita[fil][col] == True and self.table.board[fil][col] != 0  and self.contador >= 18 and self.:
+
         return False
+
+    def colocar_ficha(self,fil,col):
+            if tablita[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
+                ficha = Ficha(fil,col,self.turn)
+                self.table.board[fil][col]=ficha
+                self.cambiar_turno()
+                self.contador = self.contador +1 #Numero de fichas
+                self.table.verificar_molino()
     
