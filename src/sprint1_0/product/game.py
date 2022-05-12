@@ -46,7 +46,7 @@ class Game():
             self.player = "1"
 
     def colocar_ficha(self, fil, col):
-        if valid_boxes[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
+        if valid_boxes[fil][col] == True and self.table.check_empty(fil, col) and self.contador < 18:
             ficha = Ficha(fil, col, self.turn)
             self.table.board[fil][col] = ficha
             self.cambiar_turno()
