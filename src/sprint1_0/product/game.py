@@ -1,8 +1,8 @@
 import pygame
 import sys
-from table import Table
-from constants import BROWN, WHITE, GREY, screen, SIZE, tablita
-from ficha import Ficha
+from product.table import Table
+from product.constants import BROWN, WHITE, GREY, screen, SIZE, tablita
+from product.ficha import Ficha
 
 sys.path.append("..\\..\\Proyecto-Desarrollo-Software")
 
@@ -32,7 +32,7 @@ class Game():
 
     def cambiar_turno(self):
         if self.turn == GREY:
-            self.turn = WHITE
+            self.turn = BROWN
         else:
             self.turn = GREY
 
