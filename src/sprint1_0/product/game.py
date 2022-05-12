@@ -1,3 +1,4 @@
+from turtle import circle
 import pygame
 import sys
 from table import Table
@@ -10,8 +11,10 @@ sys.path.append(
 
 def get_row_col_from_mouse(pos):
     x, y = pos
-    row = (y-SIZE // 2) // SIZE
-    col = (x-SIZE // 2) // SIZE
+    circle_diameter = 20
+    print(x, y)
+    row = (y - SIZE//2 + circle_diameter) // SIZE
+    col = (x - SIZE//2 + circle_diameter) // SIZE
     return row, col
 
 # CLASE JUEGO

@@ -14,7 +14,7 @@ BROWN = (240, 240, 240)
 BLACK = (0, 0, 0)
 COLOR_TABLE = (247, 205, 102)
 
-#
+# Tabla de posiciones válidas
 valid_boxes = [
     [True, False, False, True, False, False, True],
     [False, True, False, True, False, True, False],
