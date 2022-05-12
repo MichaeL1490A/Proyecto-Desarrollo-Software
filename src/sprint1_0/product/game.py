@@ -36,6 +36,14 @@ class Game():
         else:
             self.turn = GREY
 
+    def colocar_ficha(self,fil,col):
+            if tablita[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
+                ficha = Ficha(fil,col,self.turn)
+                self.table.board[fil][col]=ficha
+                self.cambiar_turno()
+                self.contador = self.contador +1 #Numero de fichas
+                self.table.check_mill()
+
     def process_events(self, screen):
         screen.fill(BROWN)
         for event in pygame.event.get():
@@ -65,12 +73,4 @@ class Game():
                     #if tablita[fil][col] == True and self.table.board[fil][col] != 0  and self.contador >= 18 and self.:
 
         return False
-
-    def colocar_ficha(self,fil,col):
-            if tablita[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
-                ficha = Ficha(fil,col,self.turn)
-                self.table.board[fil][col]=ficha
-                self.cambiar_turno()
-                self.contador = self.contador +1 #Numero de fichas
-                self.table.verificar_molino()
     

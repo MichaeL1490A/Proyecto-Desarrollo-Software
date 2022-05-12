@@ -18,3 +18,6 @@ class TestGame(unittest.TestCase):
         g.cambiar_turno()
         g.cambiar_turno()
         self.assertEqual(g.turn,GREY)
+    def test_get_row_col_from_pos(self):
+        row,col=get_row_col_from_mouse((500,500))
+        self.assertEqual((3,3),(row,col))
