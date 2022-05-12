@@ -1,5 +1,5 @@
 import pygame
-from constants import tablita, BLACK, SIZE, GREY, BROWN
+from constants import valid_boxes, BLACK, SIZE, GREY, BROWN
 
 
 class Table():
@@ -13,7 +13,7 @@ class Table():
             self.board.append([])
             for col in range(7):
                 self.board[fil].append(0)
-                if tablita[fil][col] == True:
+                if valid_boxes[fil][col] == True:
                     pygame.draw.circle(
                         screen, BLACK, (fil*SIZE + SIZE//2, col*SIZE + SIZE//2), 15)
 
