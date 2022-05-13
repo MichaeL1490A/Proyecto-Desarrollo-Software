@@ -2,9 +2,9 @@ import sys
 import unittest
 import pygame
 sys.path.append(
-    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software\src\sprint1_0")
-from product.game import *
-from product.constants import GREY, BROWN
+    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software\src\sprint1_0\product")
+from game import *
+from constants import GREY, BROWN
 
 class TestGame(unittest.TestCase):
     def test_cambiar_turno(self):
