@@ -1,10 +1,11 @@
 import pygame
-from product.ficha import Ficha
-from product.table import *
 import unittest
 import sys
 sys.path.append(
-    "c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software\\src\\sprint1_0\\product")
+    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software\src\sprint1_0\product")
+from ficha import Ficha
+from table import *
+
 
 sys.path.append("..")
 

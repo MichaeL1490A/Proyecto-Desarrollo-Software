@@ -1,6 +1,9 @@
 import pygame
+import sys
 from constants import SIZE
 # CLASE FICHA
+sys.path.append(
+    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software")
 
 
 class Ficha():

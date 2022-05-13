@@ -6,7 +6,7 @@ from constants import BROWN, BLACK, GREY, screen, SIZE, valid_boxes, COLOR_TABLE
 from ficha import Ficha
 
 sys.path.append(
-    "c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software")
+    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software")
 
 
 def get_row_col_from_mouse(pos):

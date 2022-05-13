@@ -4,7 +4,7 @@ import sys
 import unittest
 import pygame
 sys.path.append(
-    "c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software\\src\\sprint1_0\\product")
+    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software\src\sprint1_0\product")
 
 
 class TestGame(unittest.TestCase):
@@ -23,7 +23,7 @@ class TestGame(unittest.TestCase):
 
     def test_get_row_col_from_pos(self):
         row, col = get_row_col_from_mouse((500, 500))
-        self.assertEqual((3, 3), (row, col))
+        self.assertEqual((4, 4), (row, col))
 
     def test_colocar_ficha(self):
         screen = pygame.display.set_mode([800, 800])

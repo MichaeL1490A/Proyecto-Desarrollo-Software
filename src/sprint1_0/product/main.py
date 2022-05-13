@@ -3,7 +3,7 @@ from game import Game
 import pygame
 import sys
 sys.path.append(
-    "c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software")
+    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software")
 
 
 def main():

@@ -1,5 +1,5 @@
 import sys
-sys.path.append("c:\\Users\\Hitee\\Desktop\\ProyectoNinMenMorris\\Proyecto-Desarrollo-Software\\src\\sprint1_0\\product")
+sys.path.append("D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software\src\sprint1_0\product")
 import unittest
 from constants import SIZE,GREY
 from ficha import Ficha
