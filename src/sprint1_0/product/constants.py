@@ -4,7 +4,7 @@ import pygame
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
 FIL, COL = 7, 7
-SIZE = (SCREEN_WIDTH) // COL
+SIZE = SCREEN_WIDTH // COL
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
 # Colors
