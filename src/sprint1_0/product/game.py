@@ -59,7 +59,6 @@ class Game():
             self.table.board[fil][col] = ficha
             self.cambiar_turno()
             self.num_piece(1)
-            self.table.check_mill()
 
     def turn_text(self):
         # Muestra en texto al jugador que le toca
@@ -88,6 +87,7 @@ class Game():
                 fil, col = get_row_col_from_mouse(mouse)
                 if fil >= 0 and col >= 0:
                     self.set_piece(fil, col)
+                    self.table.check_mill()
                 '''if fil >= 0 and col >= 0:
                     if valid_boxes[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
                         ficha = Ficha(fil, col, self.turn)
