@@ -1,4 +1,5 @@
 import pygame
+from ficha import Ficha
 from constants import valid_boxes, BLACK, SIZE, GREY, BROWN
 
 
@@ -118,3 +119,7 @@ class Table():
             [True, False, False, True, False, False, True],
         ]
         return valid_boxes[fil][col]
+
+    def create_piece(self, fil, col, turn):
+        ficha = Ficha(fil, col, turn)
+        self.board[fil][col] = ficha
