@@ -30,6 +30,8 @@ class Game():
         self.turn = GREY
         self.player = "1"
 
+    # Historia de usuario 5
+
     def update(self):
         self.table.draw_screen(screen)
         # self.ficha.draw(screen) #PRUEBA
