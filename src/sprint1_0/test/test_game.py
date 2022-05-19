@@ -28,6 +28,6 @@ class TestGame(unittest.TestCase):
         screen = pygame.display.set_mode([800, 800])
         g = Game(screen)
         g.update()
-        g.colocar_ficha(2, 2)
+        g.set_piece(2, 2)
         self.assertTrue(g.table.board[2][2] != 0)
         self.assertFalse(g.table.board[0][0] != 0)
