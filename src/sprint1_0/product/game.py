@@ -43,7 +43,7 @@ class Game():
             self.turn = GREY
             self.player = "1"
 
-    # AC 1.2
+    # Historia de usuario 1
     def set_piece(self, fil, col):
         if valid_boxes[fil][col] == True and self.table.check_empty(fil, col) and self.contador < 18:
             ficha = Ficha(fil, col, self.turn)

@@ -98,7 +98,7 @@ class Table():
             return True
         else:
             return False
-    # FALTA PROBAR
+    # AC 1.1 1.2
 
     def check_empty(self, fil, col):
         if self.board[fil][col] == 0:
