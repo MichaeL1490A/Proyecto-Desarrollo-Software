@@ -37,7 +37,7 @@ class Game():
         # self.ficha.draw(screen) #PRUEBA
         pygame.display.update()
 
-    def cambiar_turno(self):
+    def change_turn(self):
         if self.turn == GREY:
             self.turn = BROWN
             self.player = "2"
@@ -46,21 +46,20 @@ class Game():
             self.player = "1"
     # AC 1.3
 
-    def num_pieces(self):
+    def pieces_left_add(self, num):
+        self.contador = self.contador + num
+
+    def pieces_left(self):
         if self.contador < 18:
             return True
         return False
-
-    def num_piece(self, num):
-        self.contador = self.contador + num
     # Historia de usuario 1
 
     def set_piece(self, fil, col):
-        if self.table.check_empty(fil, col) and self.num_pieces() and self.table.valid_place(fil, col) == True:
-            ficha = Ficha(fil, col, self.turn)
-            self.table.board[fil][col] = ficha
-            self.cambiar_turno()
-            self.num_piece(1)
+        if self.table.valid_place(fil, col) == True and self.table.check_empty(fil, col) and self.pieces_left():
+            self.table.create_piece(fil, col, self.turn)
+            self.change_turn()
+            self.pieces_left_add(1)
 
     def turn_text(self):
         # Muestra en texto al jugador que le toca
@@ -94,7 +93,7 @@ class Game():
                     if valid_boxes[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
                         ficha = Ficha(fil, col, self.turn)
                         self.table.board[fil][col] = ficha
-                        self.cambiar_turno()
+                        self.change_turn()
                         self.contador = self.contador +1 #Numero de fichas
                         self.table.verificar_molino()'''
                 # Implementacion de movimiento
