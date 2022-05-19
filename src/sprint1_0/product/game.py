@@ -11,7 +11,6 @@ sys.path.append(
 def get_row_col_from_mouse(pos):
     x, y = pos
     circle_diameter = 20
-    print(x, y)
     row = (y - SIZE//2 + circle_diameter) // SIZE
     col = (x - SIZE//2 + circle_diameter) // SIZE
     return row, col
@@ -57,7 +56,7 @@ class Game():
         # Muestra en texto al jugador que le toca
         font = pygame.font.SysFont("serif", 20)
         text = font.render("JUGADOR "+self.player, True, BLACK)
-        center_x = SIZE*3+SIZE//2 - text.get_width()//2
+        center_x = SIZE*3 + SIZE//2 - text.get_width()//2
         center_y = 20 - text.get_height()//2
         screen.blit(text, [center_x, center_y])
 
