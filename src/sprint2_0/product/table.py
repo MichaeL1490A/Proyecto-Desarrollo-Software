@@ -105,6 +105,7 @@ class Table():
             return True
         else:
             return False
+    # AC 1.4
 
     def valid_place(self, fil, col):
         valid_boxes = [
