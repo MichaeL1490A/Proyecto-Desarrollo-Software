@@ -42,14 +42,23 @@ class Game():
         else:
             self.turn = GREY
             self.player = "1"
+    # AC 1.3
 
+    def num_pieces(self):
+        if self.contador < 18:
+            return True
+        return False
+
+    def num_piece(self, num):
+        self.contador = self.contador + num
     # Historia de usuario 1
+
     def set_piece(self, fil, col):
-        if valid_boxes[fil][col] == True and self.table.check_empty(fil, col) and self.contador < 18:
+        if valid_boxes[fil][col] == True and self.table.check_empty(fil, col) and self.num_pieces():
             ficha = Ficha(fil, col, self.turn)
             self.table.board[fil][col] = ficha
             self.cambiar_turno()
-            self.contador = self.contador + 1  # Numero de fichas
+            self.num_piece(1)
             self.table.check_mill()
 
     def turn_text(self):
