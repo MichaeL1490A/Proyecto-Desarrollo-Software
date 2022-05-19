@@ -54,7 +54,7 @@ class Game():
     # Historia de usuario 1
 
     def set_piece(self, fil, col):
-        if valid_boxes[fil][col] == True and self.table.check_empty(fil, col) and self.num_pieces():
+        if self.table.check_empty(fil, col) and self.num_pieces() and self.table.valid_place(fil, col) == True:
             ficha = Ficha(fil, col, self.turn)
             self.table.board[fil][col] = ficha
             self.cambiar_turno()
