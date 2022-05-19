@@ -1,4 +1,3 @@
-from turtle import circle
 import pygame
 import sys
 from table import Table
@@ -45,7 +44,8 @@ class Game():
             self.turn = GREY
             self.player = "1"
 
-    def colocar_ficha(self, fil, col):
+    # AC 1.2
+    def set_piece(self, fil, col):
         if valid_boxes[fil][col] == True and self.table.check_empty(fil, col) and self.contador < 18:
             ficha = Ficha(fil, col, self.turn)
             self.table.board[fil][col] = ficha
@@ -79,7 +79,7 @@ class Game():
                 mouse = pygame.mouse.get_pos()
                 fil, col = get_row_col_from_mouse(mouse)
                 if fil >= 0 and col >= 0:
-                    self.colocar_ficha(fil, col)
+                    self.set_piece(fil, col)
                 '''if fil >= 0 and col >= 0:
                     if valid_boxes[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
                         ficha = Ficha(fil, col, self.turn)
