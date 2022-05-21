@@ -66,7 +66,7 @@ class Game():
     def remove_piece(self, fil, col):
         if self.table.valid_place(fil, col) == True:
             self.table.delete_piece(fil, col)
-            self.change_turn()  # SI SOLO HAY 1 MOLINO SINO REPITE
+            self.change_turn()
 
     def turn_text(self):
         # Muestra en texto al jugador que le toca
@@ -102,7 +102,7 @@ class Game():
             elif event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Quitar":
                 mouse = pygame.mouse.get_pos()
                 fil, col = get_row_col_from_mouse(mouse)
-                if fil >= 0 and col >= 0 and not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col):
+                if fil >= 0 and col >= 0 and not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
                     self.remove_piece(fil, col)
                     self.modo = "Colocar"
                 '''if fil >= 0 and col >= 0:
