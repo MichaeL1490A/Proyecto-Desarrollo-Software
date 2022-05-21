@@ -53,52 +53,132 @@ class Table():
                     ficha.draw(screen)
 
     # Revisa si se a formado un molino
-    def check_mill(self):
-        # Horizontal
-        if (self.board[0][0].__repr__() == str(GREY) and self.board[0][3].__repr__() == str(GREY) and self.board[0][6].__repr__() == str(GREY)) or (self.board[0][0].__repr__() == str(BROWN) and self.board[0][3].__repr__() == str(BROWN) and self.board[0][6].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[1][1].__repr__() == str(GREY) and self.board[1][3].__repr__() == str(GREY) and self.board[1][5].__repr__() == str(GREY)) or (self.board[1][1].__repr__() == str(BROWN) and self.board[1][3].__repr__() == str(BROWN) and self.board[1][5].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[2][2].__repr__() == str(GREY) and self.board[2][3].__repr__() == str(GREY) and self.board[2][4].__repr__() == str(GREY)) or (self.board[2][2].__repr__() == str(BROWN) and self.board[2][3].__repr__() == str(BROWN) and self.board[2][4].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if ((self.board[3][0].__repr__() == str(GREY) and self.board[3][1].__repr__() == str(GREY) and self.board[3][2].__repr__() == str(GREY)) or (self.board[3][4].__repr__() == str(GREY) and self.board[3][5].__repr__() == str(GREY) and self.board[3][6].__repr__() == str(GREY))) or ((self.board[3][0].__repr__() == str(BROWN) and self.board[3][1].__repr__() == str(BROWN) and self.board[3][2].__repr__() == str(BROWN)) or (self.board[3][4].__repr__() == str(BROWN) and self.board[3][5].__repr__() == str(BROWN) and self.board[3][6].__repr__() == str(BROWN))):
-            print("Molino")
-            return True
-        if (self.board[4][2].__repr__() == str(GREY) and self.board[4][3].__repr__() == str(GREY) and self.board[4][4].__repr__() == str(GREY)) or (self.board[4][2].__repr__() == str(BROWN) and self.board[4][3].__repr__() == str(BROWN) and self.board[4][4].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[5][1].__repr__() == str(GREY) and self.board[5][3].__repr__() == str(GREY) and self.board[5][5].__repr__() == str(GREY)) or (self.board[5][1].__repr__() == str(BROWN) and self.board[5][3].__repr__() == str(BROWN) and self.board[5][5].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[6][0].__repr__() == str(GREY) and self.board[6][3].__repr__() == str(GREY) and self.board[6][6].__repr__() == str(GREY)) or (self.board[6][0].__repr__() == str(BROWN) and self.board[6][3].__repr__() == str(BROWN) and self.board[6][6].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[0][0].__repr__() == str(GREY) and self.board[3][0].__repr__() == str(GREY) and self.board[6][0].__repr__() == str(GREY)) or (self.board[0][0].__repr__() == str(BROWN) and self.board[3][0].__repr__() == str(BROWN) and self.board[6][0].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[1][1].__repr__() == str(GREY) and self.board[3][1].__repr__() == str(GREY) and self.board[5][1].__repr__() == str(GREY)) or (self.board[1][1].__repr__() == str(BROWN) and self.board[3][1].__repr__() == str(BROWN) and self.board[5][1].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[2][2].__repr__() == str(GREY) and self.board[3][2].__repr__() == str(GREY) and self.board[4][2].__repr__() == str(GREY)) or (self.board[2][2].__repr__() == str(BROWN) and self.board[3][2].__repr__() == str(BROWN) and self.board[4][2].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if ((self.board[0][3].__repr__() == str(GREY) and self.board[1][3].__repr__() == str(GREY) and self.board[2][3].__repr__() == str(GREY)) or (self.board[4][3].__repr__() == str(GREY) and self.board[5][3].__repr__() == str(GREY) and self.board[6][3].__repr__() == str(GREY))) or ((self.board[0][3].__repr__() == str(BROWN) and self.board[1][3].__repr__() == str(BROWN) and self.board[2][3].__repr__() == str(BROWN)) or (self.board[4][3].__repr__() == str(BROWN) and self.board[5][3].__repr__() == str(BROWN) and self.board[6][3].__repr__() == str(BROWN))):
-            print("Molino")
-            return True
-        if (self.board[2][4].__repr__() == str(GREY) and self.board[3][4].__repr__() == str(GREY) and self.board[4][4].__repr__() == str(GREY)) or (self.board[2][4].__repr__() == str(BROWN) and self.board[3][4].__repr__() == str(BROWN) and self.board[4][4].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[1][5].__repr__() == str(GREY) and self.board[3][5].__repr__() == str(GREY) and self.board[5][5].__repr__() == str(GREY)) or (self.board[1][5].__repr__() == str(BROWN) and self.board[3][5].__repr__() == str(BROWN) and self.board[5][5].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        if (self.board[0][6].__repr__() == str(GREY) and self.board[3][6].__repr__() == str(GREY) and self.board[6][6].__repr__() == str(GREY)) or (self.board[0][6].__repr__() == str(BROWN) and self.board[3][6].__repr__() == str(BROWN) and self.board[6][6].__repr__() == str(BROWN)):
-            print("Molino")
-            return True
-        else:
-            return False
+    def check_mill(self, fil, col):
+        colors = (GREY, BROWN)
+        for color in colors:
+            # Cuadrado Grande
+            if fil == 0 and col == 0:
+                if self.board[0][0].__repr__() == str(color) and self.board[0][3].__repr__() == str(color) and self.board[0][6].__repr__() == str(color):
+                    return True
+                if self.board[0][0].__repr__() == str(color) and self.board[3][0].__repr__() == str(color) and self.board[6][0].__repr__() == str(color):
+                    return True
+            if fil == 0 and col == 3:
+                if self.board[0][3].__repr__() == str(color) and self.board[0][0].__repr__() == str(color) and self.board[0][6].__repr__() == str(color):
+                    return True
+                if self.board[0][3].__repr__() == str(color) and self.board[1][3].__repr__() == str(color) and self.board[2][3].__repr__() == str(color):
+                    return True
+            if fil == 0 and col == 6:
+                if self.board[0][6].__repr__() == str(color) and self.board[0][3].__repr__() == str(color) and self.board[0][0].__repr__() == str(color):
+                    return True
+                if self.board[0][6].__repr__() == str(color) and self.board[3][6].__repr__() == str(color) and self.board[6][6].__repr__() == str(color):
+                    return True
+            if fil == 3 and col == 6:
+                if self.board[3][6].__repr__() == str(color) and self.board[0][6].__repr__() == str(color) and self.board[6][6].__repr__() == str(color):
+                    return True
+                if self.board[3][6].__repr__() == str(color) and self.board[3][5].__repr__() == str(color) and self.board[3][4].__repr__() == str(color):
+                    return True
+            if fil == 6 and col == 6:
+                if self.board[6][6].__repr__() == str(color) and self.board[3][6].__repr__() == str(color) and self.board[0][6].__repr__() == str(color):
+                    return True
+                if self.board[6][6].__repr__() == str(color) and self.board[6][3].__repr__() == str(color) and self.board[6][0].__repr__() == str(color):
+                    return True
+            if fil == 6 and col == 3:
+                if self.board[6][3].__repr__() == str(color) and self.board[6][6].__repr__() == str(color) and self.board[6][0].__repr__() == str(color):
+                    return True
+                if self.board[6][3].__repr__() == str(color) and self.board[5][3].__repr__() == str(color) and self.board[4][3].__repr__() == str(color):
+                    return True
+            if fil == 6 and col == 0:
+                if self.board[6][0].__repr__() == str(color) and self.board[3][0].__repr__() == str(color) and self.board[0][0].__repr__() == str(color):
+                    return True
+                if self.board[6][0].__repr__() == str(color) and self.board[6][3].__repr__() == str(color) and self.board[6][6].__repr__() == str(color):
+                    return True
+            if fil == 3 and col == 0:
+                if self.board[3][0].__repr__() == str(color) and self.board[6][0].__repr__() == str(color) and self.board[0][0].__repr__() == str(color):
+                    return True
+                if self.board[3][0].__repr__() == str(color) and self.board[3][1].__repr__() == str(color) and self.board[3][2].__repr__() == str(color):
+                    return True
+            # Cuadrado Mediano
+            if fil == 1 and col == 1:
+                if self.board[1][1].__repr__() == str(color) and self.board[1][3].__repr__() == str(color) and self.board[1][5].__repr__() == str(color):
+                    return True
+                if self.board[1][1].__repr__() == str(color) and self.board[3][1].__repr__() == str(color) and self.board[5][1].__repr__() == str(color):
+                    return True
+            if fil == 1 and col == 3:
+                if self.board[1][3].__repr__() == str(color) and self.board[1][1].__repr__() == str(color) and self.board[1][5].__repr__() == str(color):
+                    return True
+                if self.board[1][3].__repr__() == str(color) and self.board[0][3].__repr__() == str(color) and self.board[2][3].__repr__() == str(color):
+                    return True
+            if fil == 1 and col == 5:
+                if self.board[1][5].__repr__() == str(color) and self.board[1][3].__repr__() == str(color) and self.board[1][1].__repr__() == str(color):
+                    return True
+                if self.board[1][5].__repr__() == str(color) and self.board[3][5].__repr__() == str(color) and self.board[5][5].__repr__() == str(color):
+                    return True
+            if fil == 3 and col == 5:
+                if self.board[3][5].__repr__() == str(color) and self.board[1][5].__repr__() == str(color) and self.board[5][5].__repr__() == str(color):
+                    return True
+                if self.board[3][5].__repr__() == str(color) and self.board[3][4].__repr__() == str(color) and self.board[3][6].__repr__() == str(color):
+                    return True
+            if fil == 5 and col == 5:
+                if self.board[5][5].__repr__() == str(color) and self.board[3][5].__repr__() == str(color) and self.board[1][5].__repr__() == str(color):
+                    return True
+                if self.board[5][5].__repr__() == str(color) and self.board[5][3].__repr__() == str(color) and self.board[5][1].__repr__() == str(color):
+                    return True
+            if fil == 5 and col == 3:
+                if self.board[5][3].__repr__() == str(color) and self.board[5][5].__repr__() == str(color) and self.board[5][1].__repr__() == str(color):
+                    return True
+                if self.board[5][3].__repr__() == str(color) and self.board[6][3].__repr__() == str(color) and self.board[4][3].__repr__() == str(color):
+                    return True
+            if fil == 5 and col == 1:
+                if self.board[5][1].__repr__() == str(color) and self.board[3][1].__repr__() == str(color) and self.board[1][1].__repr__() == str(color):
+                    return True
+                if self.board[5][1].__repr__() == str(color) and self.board[5][3].__repr__() == str(color) and self.board[5][5].__repr__() == str(color):
+                    return True
+            if fil == 3 and col == 1:
+                if self.board[3][1].__repr__() == str(color) and self.board[5][1].__repr__() == str(color) and self.board[1][1].__repr__() == str(color):
+                    return True
+                if self.board[3][1].__repr__() == str(color) and self.board[3][0].__repr__() == str(color) and self.board[3][2].__repr__() == str(color):
+                    return True
+            # CUADRADO PEQUEÑO
+            if fil == 2 and col == 2:
+                if self.board[2][2].__repr__() == str(color) and self.board[2][3].__repr__() == str(color) and self.board[2][4].__repr__() == str(color):
+                    return True
+                if self.board[2][2].__repr__() == str(color) and self.board[3][2].__repr__() == str(color) and self.board[4][2].__repr__() == str(color):
+                    return True
+            if fil == 2 and col == 3:
+                if self.board[2][3].__repr__() == str(color) and self.board[2][2].__repr__() == str(color) and self.board[2][4].__repr__() == str(color):
+                    return True
+                if self.board[2][3].__repr__() == str(color) and self.board[0][3].__repr__() == str(color) and self.board[1][3].__repr__() == str(color):
+                    return True
+            if fil == 2 and col == 4:
+                if self.board[2][4].__repr__() == str(color) and self.board[2][3].__repr__() == str(color) and self.board[2][2].__repr__() == str(color):
+                    return True
+                if self.board[2][4].__repr__() == str(color) and self.board[3][4].__repr__() == str(color) and self.board[4][4].__repr__() == str(color):
+                    return True
+            if fil == 3 and col == 4:
+                if self.board[3][4].__repr__() == str(color) and self.board[2][4].__repr__() == str(color) and self.board[4][4].__repr__() == str(color):
+                    return True
+                if self.board[3][4].__repr__() == str(color) and self.board[3][5].__repr__() == str(color) and self.board[3][6].__repr__() == str(color):
+                    return True
+            if fil == 4 and col == 4:
+                if self.board[4][4].__repr__() == str(color) and self.board[3][4].__repr__() == str(color) and self.board[2][4].__repr__() == str(color):
+                    return True
+                if self.board[4][4].__repr__() == str(color) and self.board[4][3].__repr__() == str(color) and self.board[4][2].__repr__() == str(color):
+                    return True
+            if fil == 4 and col == 3:
+                if self.board[4][3].__repr__() == str(color) and self.board[4][4].__repr__() == str(color) and self.board[4][2].__repr__() == str(color):
+                    return True
+                if self.board[4][3].__repr__() == str(color) and self.board[5][3].__repr__() == str(color) and self.board[6][3].__repr__() == str(color):
+                    return True
+            if fil == 4 and col == 2:
+                if self.board[4][2].__repr__() == str(color) and self.board[3][2].__repr__() == str(color) and self.board[2][2].__repr__() == str(color):
+                    return True
+                if self.board[4][2].__repr__() == str(color) and self.board[4][3].__repr__() == str(color) and self.board[4][4].__repr__() == str(color):
+                    return True
+            if fil == 3 and col == 2:
+                if self.board[3][2].__repr__() == str(color) and self.board[4][2].__repr__() == str(color) and self.board[2][2].__repr__() == str(color):
+                    return True
+                if self.board[3][2].__repr__() == str(color) and self.board[3][1].__repr__() == str(color) and self.board[3][0].__repr__() == str(color):
+                    return True
     # AC 1.1 1.2
 
     def check_empty(self, fil, col):
@@ -123,3 +203,6 @@ class Table():
     def create_piece(self, fil, col, turn):
         ficha = Ficha(fil, col, turn)
         self.board[fil][col] = ficha
+
+    def delete_piece(self, fil, col):
+        self.board[fil][col] = 0

@@ -3,7 +3,7 @@ import sys
 from table import Table
 from constants import BROWN, BLACK, GREY, screen, SIZE, valid_boxes, COLOR_TABLE
 from ficha import Ficha
-
+import time
 sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software")
 
@@ -29,6 +29,7 @@ class Game():
         # self.ficha = Ficha(1,1,BROWN) #PRUEBA
         self.turn = GREY
         self.player = "1"
+        self.modo = "Colocar"  # Prueba
 
     # Historia de usuario 5
 
@@ -44,6 +45,12 @@ class Game():
         else:
             self.turn = GREY
             self.player = "1"
+
+    def other_turn(self, turn):
+        if turn == GREY:
+            return BROWN
+        else:
+            return GREY
     # AC 1.3
 
     def pieces_left_add(self, num):
@@ -58,8 +65,13 @@ class Game():
     def set_piece(self, fil, col):
         if self.table.valid_place(fil, col) == True and self.table.check_empty(fil, col) and self.pieces_left():
             self.table.create_piece(fil, col, self.turn)
-            self.change_turn()
             self.pieces_left_add(1)
+    # Historia de usuario 7
+
+    def remove_piece(self, fil, col):
+        if self.table.valid_place(fil, col) == True:
+            self.table.delete_piece(fil, col)
+            self.change_turn()  # SI SOLO HAY 1 MOLINO SINO REPITE
 
     def turn_text(self):
         # Muestra en texto al jugador que le toca
@@ -83,12 +95,22 @@ class Game():
                 if valid_boxes[fil][col] == True:
                     self.ficha.move(fil,col)
             '''
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Colocar":
                 mouse = pygame.mouse.get_pos()
                 fil, col = get_row_col_from_mouse(mouse)
-                if fil >= 0 and col >= 0:
+                print(fil, col)
+                if fil >= 0 and col >= 0 and self.table.check_empty(fil, col):
                     self.set_piece(fil, col)
-                    self.table.check_mill()
+                    if self.table.check_mill(fil, col):
+                        self.modo = "Quitar"
+                    else:
+                        self.change_turn()
+            elif event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Quitar":
+                mouse = pygame.mouse.get_pos()
+                fil, col = get_row_col_from_mouse(mouse)
+                if fil >= 0 and col >= 0 and not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col):
+                    self.remove_piece(fil, col)
+                    self.modo = "Colocar"
                 '''if fil >= 0 and col >= 0:
                     if valid_boxes[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
                         ficha = Ficha(fil, col, self.turn)
@@ -98,5 +120,4 @@ class Game():
                         self.table.verificar_molino()'''
                 # Implementacion de movimiento
                 # if valid_boxes[fil][col] == True and self.table.board[fil][col] != 0  and self.contador >= 18 and self.:
-
         return False
