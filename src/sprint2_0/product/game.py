@@ -46,11 +46,6 @@ class Game():
             self.turn = GREY
             self.player = "1"
 
-    def other_turn(self, turn):
-        if turn == GREY:
-            return BROWN
-        else:
-            return GREY
     # AC 1.3
 
     def pieces_left_add(self, num):
@@ -98,7 +93,6 @@ class Game():
             if event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Colocar":
                 mouse = pygame.mouse.get_pos()
                 fil, col = get_row_col_from_mouse(mouse)
-                print(fil, col)
                 if fil >= 0 and col >= 0 and self.table.check_empty(fil, col):
                     self.set_piece(fil, col)
                     if self.table.check_mill(fil, col):
