@@ -207,5 +207,7 @@ class Table():
     def delete_piece(self, fil, col):
         self.board[fil][col] = 0
 
-    def move_pieces(self, fil, col):
-        self.board[fil][col].move(fil, col)
+    def move_piece(self, fil, col, newfil, newcol):
+        self.board[newfil][newcol] = self.board[fil][col]
+        self.board[fil][col].move(newfil, newcol)
+        self.board[fil][col] = 0
