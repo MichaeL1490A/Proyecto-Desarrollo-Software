@@ -1,4 +1,3 @@
-from os import remove
 import pygame
 import sys
 from table import Table

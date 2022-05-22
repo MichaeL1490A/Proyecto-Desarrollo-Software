@@ -1,12 +1,11 @@
 import pygame
-from ficha import Ficha
+from ficha import Piece
 from constants import valid_boxes, BLACK, SIZE, GREY, WHITE
 
 
 class Table():
     def __init__(self):
         self.board = []  # Fichas en juego
-        self.brown_left = self.white_left = 9  # Numero de fichas que quedan
 
     # Dibuja las posiciones válidas en el tablero
     def draw_box(self, screen):
@@ -48,11 +47,11 @@ class Table():
         self.draw_box(screen)
         for fil in range(7):
             for col in range(7):
-                ficha = self.board[fil][col]
-                if ficha != 0:
-                    ficha.draw(screen)
+                piece = self.board[fil][col]
+                if piece != 0:
+                    piece.draw(screen)
 
-    # Revisa si se a formado un molino
+    # This method checks for each places of the board if a mill has been built
     def check_mill(self, fil, col):
         colors = (GREY, WHITE)
         for color in colors:
@@ -192,8 +191,8 @@ class Table():
         return valid_boxes[fil][col]
 
     def create_piece(self, fil, col, turn):
-        ficha = Ficha(fil, col, turn)
-        self.board[fil][col] = ficha
+        piece = Piece(fil, col, turn)
+        self.board[fil][col] = piece
 
     def delete_piece(self, fil, col):
         self.board[fil][col] = 0
