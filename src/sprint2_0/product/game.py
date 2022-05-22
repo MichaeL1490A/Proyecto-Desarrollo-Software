@@ -36,12 +36,12 @@ class Game():
 
     # Historia de usuario 5
 
-    # Update method show the new actions that happen with the board game and the pieces in the GUI
+    # Update method shows the new actions that happen with the board game and the pieces in the GUI
     def update(self):
         self.table.draw_screen(screen)
         pygame.display.update()
 
-    # This method change the turn to its opponent
+    # This method changes the turn to its opponent
     def change_turn(self):
         if self.turn == GREY:
             self.turn = WHITE
@@ -51,15 +51,18 @@ class Game():
             self.player = "1"
 
     # AC 1.3
-    # This method
+    # This method subtracts the pieces each time the player place a pieces in baord
     def pieces_left_add(self, num):
         self.pieces = self.pieces - num
 
+    # This method checks remaining pieces
     def pieces_left(self):
         if self.pieces > 0:
             return True
         else:
             return False
+
+    # This method helps to change the game mode
 
     def check_mode(self):
         if self.pieces > 0:
@@ -73,6 +76,7 @@ class Game():
             self.table.create_piece(fil, col, self.turn)
             self.pieces_left_add(1)
             self.check_mode()
+
     # Historia de usuario 7
 
     def remove_piece(self, fil, col):
@@ -102,37 +106,41 @@ class Game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return True
-            # SET PIECES
-            if event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Place":
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # Get the mouse pos in cartesian coordinate of the windows
                 mouse = pygame.mouse.get_pos()
+
+                # Function to transformate from cartesian coordinate to rows and cols of a matrix 7x7
                 fil, col = get_row_col_from_mouse(mouse)
-                if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
-                    self.place_piece(fil, col)
-                    # Check if a mill has been built if not change turn
-                    if self.table.check_mill(fil, col):
-                        self.modo = "Remove"
-                    else:
-                        self.change_turn()
-            # REMOVE PIECES
-            elif event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Remove":
-                mouse = pygame.mouse.get_pos()
-                fil, col = get_row_col_from_mouse(mouse)
-                if fil >= 0 and col >= 0 and not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col) and self.table.valid_place(fil, col):
-                    self.remove_piece(fil, col)
-            # MOVE PIECES
-            elif event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Select":
-                mouse = pygame.mouse.get_pos()
-                fil, col = get_row_col_from_mouse(mouse)
-                if fil >= 0 and col >= 0 and self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
-                    self.memory = (fil, col)
-                    self.modo = "Move"
-            elif event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Move":
-                mouse = pygame.mouse.get_pos()
-                fil, col = get_row_col_from_mouse(mouse)
-                if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
-                    self.move_piece(fil, col, self.memory)
-                    if self.table.check_mill(fil, col):
-                        self.modo = "Remove"
-                    self.memory = 0
-                    self.modo = "Select"
+
+                # If the game is in Place Mode the player place pieces in the board and it checks if a mill has been build
+                if self.modo == "Place":
+                    if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
+                        self.place_piece(fil, col)
+                        # Check if a mill has been built if not change turn
+                        if self.table.check_mill(fil, col):
+                            self.modo = "Remove"
+                        else:
+                            self.change_turn()
+
+                # If the game is in Remove Mode the player just can remove pieces from the opponent
+                elif self.modo == "Remove":
+                    if fil >= 0 and col >= 0 and not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col) and self.table.valid_place(fil, col):
+                        self.remove_piece(fil, col)
+
+                # In Select Mode the player select which piece of him he is going to move
+                elif self.modo == "Select":
+                    if fil >= 0 and col >= 0 and self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
+                        self.memory = (fil, col)
+                        self.modo = "Move"
+
+                # Move Select just move the piece to the new place selected and check if a mill has ben built
+                elif self.modo == "Move":
+                    if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
+                        self.move_piece(fil, col, self.memory)
+                        # Check if a mill has been built
+                        if self.table.check_mill(fil, col):
+                            self.modo = "Remove"
+                        self.memory = 0
+                        self.modo = "Select"
         return False
