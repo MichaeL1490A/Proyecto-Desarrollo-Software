@@ -1,6 +1,6 @@
 import pygame
 from ficha import Ficha
-from constants import valid_boxes, BLACK, SIZE, GREY, BROWN
+from constants import valid_boxes, BLACK, SIZE, GREY, WHITE
 
 
 class Table():
@@ -54,7 +54,7 @@ class Table():
 
     # Revisa si se a formado un molino
     def check_mill(self, fil, col):
-        colors = (GREY, BROWN)
+        colors = (GREY, WHITE)
         for color in colors:
             # Cuadrado Grande
             if fil == 0 and col == 0:
