@@ -84,9 +84,8 @@ class Game():
     # Historia de usuario 2
 
     def move_piece(self, fil, col, memory):
-        if self.table.valid_place(fil, col) == True:
-            self.table.delete_piece(memory[0], memory[1])
-            self.table.create_piece(fil, col, self.turn)
+        if self.table.valid_place(fil, col):
+            self.table.move_piece(memory[0], memory[1], fil, col)
             self.change_turn()
 
     # This method show in the windows the player's number that is playing
@@ -109,6 +108,7 @@ class Game():
                 fil, col = get_row_col_from_mouse(mouse)
                 if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
                     self.place_piece(fil, col)
+                    # Check if a mill has been built if not change turn
                     if self.table.check_mill(fil, col):
                         self.modo = "Remove"
                     else:
