@@ -20,6 +20,11 @@ class Ficha():
         self.x = SIZE*self.col + SIZE//2
         self.y = SIZE*self.fil + SIZE//2
 
+    def move(self, fil, col):
+        self.fil = fil
+        self.col = col
+        self.calcular_posicion()
+
     def draw(self, screen):
         pygame.draw.circle(screen, self.color, (self.x, self.y), 20)
 
