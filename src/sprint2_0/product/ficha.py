@@ -23,10 +23,5 @@ class Ficha():
     def draw(self, screen):
         pygame.draw.circle(screen, self.color, (self.x, self.y), 20)
 
-    def move(self, fil, col):
-        self.fil = fil
-        self.col = col
-        self.calcular_posicion()
-
     def __repr__(self):
         return str(self.color)
