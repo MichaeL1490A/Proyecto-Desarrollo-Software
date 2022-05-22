@@ -189,15 +189,6 @@ class Table():
     # AC 1.4
 
     def valid_place(self, fil, col):
-        valid_boxes = [
-            [True, False, False, True, False, False, True],
-            [False, True, False, True, False, True, False],
-            [False, False, True, True, True, False, False],
-            [True, True, True, False, True, True, True],
-            [False, False, True, True, True, False, False],
-            [False, True, False, True, False, True, False],
-            [True, False, False, True, False, False, True],
-        ]
         return valid_boxes[fil][col]
 
     def create_piece(self, fil, col, turn):
