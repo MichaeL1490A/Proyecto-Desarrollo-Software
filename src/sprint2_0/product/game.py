@@ -1,3 +1,4 @@
+from os import remove
 import pygame
 import sys
 from table import Table
@@ -30,6 +31,7 @@ class Game():
         self.turn = GREY
         self.player = "1"
         self.modo = "Colocar"  # Prueba
+        self.memory = 0
 
     # Historia de usuario 5
 
@@ -54,18 +56,35 @@ class Game():
     def pieces_left(self):
         if self.contador < 18:
             return True
-        return False
+        else:
+            return False
     # Historia de usuario 1
 
     def set_piece(self, fil, col):
-        if self.table.valid_place(fil, col) == True and self.table.check_empty(fil, col) and self.pieces_left():
+        if self.table.valid_place(fil, col) == True and self.table.check_empty(fil, col):
             self.table.create_piece(fil, col, self.turn)
             self.pieces_left_add(1)
+            if self.contador < 18:
+                self.modo = "Colocar"
+            else:
+                self.modo = "Cojer"
     # Historia de usuario 7
 
     def remove_piece(self, fil, col):
         if self.table.valid_place(fil, col) == True:
             self.table.delete_piece(fil, col)
+            self.change_turn()
+            if self.contador < 18:
+                self.modo = "Colocar"
+            else:
+                self.modo = "Cojer"
+
+    # Historia de usuario 2
+    def move_piece(self, fil, col, memory):
+        if self.table.valid_place(fil, col) == True:
+            self.table.delete_piece(memory[0], memory[1])
+            self.table.create_piece(fil, col, self.turn)
+            #self.table.board[memory[0]][memory[1]].move(fil, col)
             self.change_turn()
 
     def turn_text(self):
@@ -82,36 +101,37 @@ class Game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return True
-            '''
-            MOVER UNA FICHA
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pos = pygame.mouse.get_pos()
-                fil,col = get_row_col_from_mouse(pos)
-                if valid_boxes[fil][col] == True:
-                    self.ficha.move(fil,col)
-            '''
+            # SET PIECES
             if event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Colocar":
                 mouse = pygame.mouse.get_pos()
                 fil, col = get_row_col_from_mouse(mouse)
-                if fil >= 0 and col >= 0 and self.table.check_empty(fil, col):
+                if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
                     self.set_piece(fil, col)
                     if self.table.check_mill(fil, col):
                         self.modo = "Quitar"
                     else:
                         self.change_turn()
+            # REMOVE PIECES
             elif event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Quitar":
                 mouse = pygame.mouse.get_pos()
                 fil, col = get_row_col_from_mouse(mouse)
-                if fil >= 0 and col >= 0 and not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
+                print("Quitando")
+                if fil >= 0 and col >= 0 and not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col) and self.table.valid_place(fil, col):
                     self.remove_piece(fil, col)
-                    self.modo = "Colocar"
-                '''if fil >= 0 and col >= 0:
-                    if valid_boxes[fil][col] == True and self.table.board[fil][col] == 0 and self.contador < 18:
-                        ficha = Ficha(fil, col, self.turn)
-                        self.table.board[fil][col] = ficha
-                        self.change_turn()
-                        self.contador = self.contador +1 #Numero de fichas
-                        self.table.verificar_molino()'''
-                # Implementacion de movimiento
-                # if valid_boxes[fil][col] == True and self.table.board[fil][col] != 0  and self.contador >= 18 and self.:
+            # MOVE PIECES
+            elif event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Cojer":
+                mouse = pygame.mouse.get_pos()
+                fil, col = get_row_col_from_mouse(mouse)
+                if fil >= 0 and col >= 0 and self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
+                    self.memory = (fil, col)
+                    self.modo = "Mover"
+            elif event.type == pygame.MOUSEBUTTONDOWN and self.modo == "Mover":
+                mouse = pygame.mouse.get_pos()
+                fil, col = get_row_col_from_mouse(mouse)
+                if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
+                    self.move_piece(fil, col, self.memory)
+                    if self.table.check_mill(fil, col):
+                        self.modo = "Quitar"
+                    self.memory = 0
+                    self.modo = "Cojer"
         return False
