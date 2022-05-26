@@ -1,7 +1,9 @@
+from asyncio.windows_events import NULL
 import pygame
 import sys
 from table import Table
-from constants import BLACK, GREY, screen, SIZE, COLOR_TABLE, WHITE
+from constants import valid_boxes, BLACK, GREY, screen, SIZE, COLOR_TABLE, WHITE
+
 sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software")
 
@@ -83,6 +85,7 @@ class Game():
             self.table.delete_piece(fil, col)
             self.change_turn()
             self.check_mode()
+            self.table.setRemove(False)
 
     # Historia de usuario 2
 
@@ -106,6 +109,19 @@ class Game():
         center_y = 20 - text.get_height()//2
         screen.blit(text, [center_x, center_y])
 
+    # Retorna una lista con las fichas que se pueden remover
+    def calculate_pieces_remove(self):
+        positions_valid_remove = []
+        for fil in range(7):
+            positions_valid_remove.append([])
+            for col in range(7):
+                if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
+                    positions_valid_remove[fil].append(1)
+                else:
+                    positions_valid_remove[fil].append(0)
+        print(positions_valid_remove)
+        return positions_valid_remove
+
     def process_events(self, screen):
         screen.fill(COLOR_TABLE)
         self.turn_text()
@@ -123,7 +139,13 @@ class Game():
                 if self.modo == "Place":
                     if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
                         self.place_piece(fil, col)
-                        self.place_mode(fil, col)
+                        # Check if a mill has been built if not change turn
+                        if self.table.check_mill(fil, col):
+                            self.table.set_list(self.calculate_pieces_remove())
+                            self.table.setRemove(True)
+                            self.modo = "Remove"
+                        else:
+                            self.change_turn()
 
                 # If the game is in Remove Mode the player just can remove pieces from the opponent
                 elif self.modo == "Remove":
@@ -142,6 +164,8 @@ class Game():
                         self.move_piece(fil, col, self.memory)
                         # Check if a mill has been built
                         if self.table.check_mill(fil, col):
+                            self.table.set_list(self.calculate_pieces_remove())
+                            self.table.setRemove(True)
                             self.modo = "Remove"
                         self.memory = 0
                         self.modo = "Select"
