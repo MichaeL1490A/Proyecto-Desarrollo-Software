@@ -31,8 +31,8 @@ class TestGame(unittest.TestCase):
         g.place_piece(2, 2)
         self.assertTrue(g.table.board[2][2] != 0)
         self.assertFalse(g.table.board[0][0] != 0)
-    
-    def test_remove_piece(self):
+
+    def test_remove_piece2(self):
         screen = pygame.display.set_mode([1000, 1000])
         g = Game(screen)
         g.update()
@@ -41,7 +41,7 @@ class TestGame(unittest.TestCase):
         g.remove_piece(2, 2)
         self.assertTrue(g.table.board[2][2] == 0)
 
-    def test_remove_piece2(self):
+    def test_remove_piece3(self):
         screen = pygame.display.set_mode([1000, 1000])
         g = Game(screen)
         g.update()

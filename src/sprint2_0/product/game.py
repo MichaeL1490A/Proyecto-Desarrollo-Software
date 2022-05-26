@@ -91,6 +91,13 @@ class Game():
             self.table.move_piece(memory[0], memory[1], fil, col)
             self.change_turn()
 
+    def place_mode(self, fil, col):
+        # Check if a mill has been built if not change turn
+        if self.table.check_mill(fil, col):
+            self.modo = "Remove"
+        else:
+            self.change_turn()
+
     # This method show in the windows the player's number that is playing
     def turn_text(self):
         font = pygame.font.SysFont("serif", 20)
@@ -116,11 +123,7 @@ class Game():
                 if self.modo == "Place":
                     if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
                         self.place_piece(fil, col)
-                        # Check if a mill has been built if not change turn
-                        if self.table.check_mill(fil, col):
-                            self.modo = "Remove"
-                        else:
-                            self.change_turn()
+                        self.place_mode(fil, col)
 
                 # If the game is in Remove Mode the player just can remove pieces from the opponent
                 elif self.modo == "Remove":
