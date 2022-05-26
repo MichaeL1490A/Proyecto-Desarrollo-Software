@@ -81,7 +81,7 @@ class Game():
     # Historia de usuario 7
 
     def remove_piece(self, fil, col):
-        if self.table.valid_place(fil, col) == True:
+        if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col) and self.table.valid_place(fil, col):
             self.table.delete_piece(fil, col)
             self.change_turn()
             self.check_mode()
@@ -142,7 +142,7 @@ class Game():
 
                 # If the game is in Remove Mode the player just can remove pieces from the opponent
                 elif self.modo == "Remove":
-                    if fil >= 0 and col >= 0 and not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col) and self.table.valid_place(fil, col):
+                    if fil >= 0 and col >= 0:
                         self.remove_piece(fil, col)
 
                 # In Select Mode the player select which piece of him he is going to move
