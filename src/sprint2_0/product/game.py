@@ -4,7 +4,7 @@ from matplotlib.pyplot import table
 import pygame
 import sys
 from table import Table
-from constants import valid_boxes, BLACK, GREY, screen, SIZE, COLOR_TABLE, WHITE
+from constants import valid_boxes, BLACK, GREY, screen, SIZE, COLOR_TABLE, WHITE, RED
 
 sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software")
@@ -114,17 +114,6 @@ class Game():
         screen.blit(text, [center_x, center_y])
 
     # Retorna una lista con las fichas que se pueden remover
-    def calculate_pieces_remove(self):
-        positions_valid_remove = []
-        for fil in range(7):
-            positions_valid_remove.append([])
-            for col in range(7):
-                if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
-                    positions_valid_remove[fil].append(1)
-                else:
-                    positions_valid_remove[fil].append(0)
-        print(positions_valid_remove)
-        return positions_valid_remove
 
     def process_events(self, screen):
         screen.fill(COLOR_TABLE)
@@ -138,38 +127,36 @@ class Game():
 
                 # Function to transformate from cartesian coordinate to rows and cols of a matrix 7x7
                 fil, col = get_row_col_from_mouse(mouse)
-
-                # If the game is in Place Mode the player place pieces in the board and it checks if a mill has been build
-                if self.modo == "Place":
-                    if fil >= 0 and col >= 0:
+                if fil >= 0 and col >= 0 and valid_boxes[fil][col]:
+                    # If the game is in Place Mode the player place pieces in the board and it checks if a mill has been build
+                    if self.modo == "Place":
                         self.place_piece(fil, col)
                         # Check if a mill has been built if not change turn
                         if self.table.check_mill(fil, col):
-                            self.table.set_list(self.calculate_pieces_remove())
-                            self.table.setRemove(True)
+                            # self.table.set_list(self.calculate_pieces_remove())
+                            # self.table.setRemove(True)
                             self.modo = "Remove"
                         else:
                             self.change_turn()
 
-                # If the game is in Remove Mode the player just can remove pieces from the opponent
+                    # If the game is in Remove Mode the player just can remove pieces from the opponent
                 elif self.modo == "Remove":
-                    if fil >= 0 and col >= 0:
-                        self.remove_piece(fil, col)
+                    self.remove_piece(fil, col)
 
                 # In Select Mode the player select which piece of him he is going to move
                 elif self.modo == "Select":
-                    if fil >= 0 and col >= 0 and self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
+                    if self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
                         self.memory = (fil, col)
                         self.modo = "Move"
 
-                # Move Select just move the piece to the new place selected and check if a mill has ben built
+                    # Move Select just move the piece to the new place selected and check if a mill has ben built
                 elif self.modo == "Move":
                     if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
                         self.move_piece(fil, col, self.memory)
                         # Check if a mill has been built
                         if self.table.check_mill(fil, col):
-                            self.table.set_list(self.calculate_pieces_remove())
-                            self.table.setRemove(True)
+                            # self.table.set_list(self.calculate_pieces_remove())
+                            # self.table.setRemove(True)
                             self.modo = "Remove"
                         self.memory = 0
                         self.modo = "Select"
