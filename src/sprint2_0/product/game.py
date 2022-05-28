@@ -99,12 +99,12 @@ class Game():
         if self.table.check_empty(fil, col):
             self.table.move_piece(memory[0], memory[1], fil, col)
             # Check if a mill has been built
-            if self.table.check_mill(fil, col):
-                print("holiwis")
-                self.modo = "Remove"
             self.memory = 0
             self.modo = "Select"
-            self.change_turn()
+            if self.table.check_mill(fil, col):
+                self.modo = "Remove"
+            else:
+                self.change_turn()
 
     def place_mode(self, fil, col):
         # Check if a mill has been built if not change turn
@@ -152,7 +152,7 @@ class Game():
                             self.memory = (fil, col)
                             self.modo = "Move"
 
-                        # Move Select just move the piece to the new place selected and check if a mill has ben built
+                    # Move Select just move the piece to the new place selected and check if a mill has ben built
                     elif self.modo == "Move":
                         self.move_piece(fil, col, self.memory)
         return False
