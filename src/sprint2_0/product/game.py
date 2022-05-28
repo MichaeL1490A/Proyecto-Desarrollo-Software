@@ -75,28 +75,29 @@ class Game():
     # Historia de usuario 1
 
     def place_piece(self, fil, col):
-        if self.table.valid_place(fil, col) == True and self.table.check_empty(fil, col) and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
+        if self.table.check_empty(fil, col) and self.pieces_left():
             self.table.create_piece(fil, col, self.turn)
             self.pieces_left_add(1)
             self.check_mode()
-        elif self.table.check_empty(fil, col) == False:
-            return False
+            # Check if a mill has been built if not change turn
+            if self.table.check_mill(fil, col):
+                self.modo = "Remove"
+            else:
+                self.change_turn()
 
     # Historia de usuario 7
 
     def remove_piece(self, fil, col):
-        if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col) and self.table.valid_place(fil, col):
+        if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
             self.table.delete_piece(fil, col)
             self.change_turn()
             self.check_mode()
-            self.table.setRemove(False)
 
     # Historia de usuario 2
 
     def move_piece(self, fil, col, memory):
-        if self.table.valid_place(fil, col):
-            self.table.move_piece(memory[0], memory[1], fil, col)
-            self.change_turn()
+        self.table.move_piece(memory[0], memory[1], fil, col)
+        self.change_turn()
 
     def place_mode(self, fil, col):
         # Check if a mill has been built if not change turn
@@ -127,37 +128,33 @@ class Game():
 
                 # Function to transformate from cartesian coordinate to rows and cols of a matrix 7x7
                 fil, col = get_row_col_from_mouse(mouse)
+
                 if fil >= 0 and col >= 0 and valid_boxes[fil][col]:
+                    print(self.modo)
                     # If the game is in Place Mode the player place pieces in the board and it checks if a mill has been build
                     if self.modo == "Place":
                         self.place_piece(fil, col)
-                        # Check if a mill has been built if not change turn
-                        if self.table.check_mill(fil, col):
-                            # self.table.set_list(self.calculate_pieces_remove())
-                            # self.table.setRemove(True)
-                            self.modo = "Remove"
-                        else:
-                            self.change_turn()
 
                     # If the game is in Remove Mode the player just can remove pieces from the opponent
-                elif self.modo == "Remove":
-                    self.remove_piece(fil, col)
+                    elif self.modo == "Remove":
+                        print("si pase")
+                        self.remove_piece(fil, col)
 
-                # In Select Mode the player select which piece of him he is going to move
-                elif self.modo == "Select":
-                    if self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
-                        self.memory = (fil, col)
-                        self.modo = "Move"
+                    # In Select Mode the player select which piece of him he is going to move
+                    elif self.modo == "Select":
+                        if self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
+                            self.memory = (fil, col)
+                            self.modo = "Move"
 
-                    # Move Select just move the piece to the new place selected and check if a mill has ben built
-                elif self.modo == "Move":
-                    if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
-                        self.move_piece(fil, col, self.memory)
-                        # Check if a mill has been built
-                        if self.table.check_mill(fil, col):
-                            # self.table.set_list(self.calculate_pieces_remove())
-                            # self.table.setRemove(True)
-                            self.modo = "Remove"
-                        self.memory = 0
-                        self.modo = "Select"
+                        # Move Select just move the piece to the new place selected and check if a mill has ben built
+                    elif self.modo == "Move":
+                        if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
+                            self.move_piece(fil, col, self.memory)
+                            # Check if a mill has been built
+                            if self.table.check_mill(fil, col):
+                                # self.table.set_list(self.calculate_pieces_remove())
+                                # self.table.setRemove(True)
+                                self.modo = "Remove"
+                            self.memory = 0
+                            self.modo = "Select"
         return False
