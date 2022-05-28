@@ -1,4 +1,6 @@
 from asyncio.windows_events import NULL
+from tabnanny import check
+from matplotlib.pyplot import table
 import pygame
 import sys
 from table import Table
@@ -77,6 +79,8 @@ class Game():
             self.table.create_piece(fil, col, self.turn)
             self.pieces_left_add(1)
             self.check_mode()
+        elif self.table.check_empty(fil, col) == False:
+            return False
 
     # Historia de usuario 7
 
