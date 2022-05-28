@@ -55,15 +55,11 @@ class Table():
                     piece.draw(screen)
 
     def check_nexto(self, fil, col, newfil, newcol):
-        colors = (GREY, WHITE)
-        #print("Espacios permitodos de "+str(fil)+","+str(col)+" son: ")
-        print(fil, col, "-", newfil, newcol)
         for place in next_to_piece[(fil, col)]:
             if newfil == place[0] and newcol == place[1]:
                 return True
         return False
 
-        # print(len(self.next_to_piece[(0, 3)]))
     # This method checks for each places of the board if a mill has been built
 
     def check_mill(self, fil, col):
