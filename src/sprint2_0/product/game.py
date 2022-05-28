@@ -96,22 +96,15 @@ class Game():
     # Historia de usuario 2
 
     def move_piece(self, fil, col, memory):
-        if self.table.check_empty(fil, col):
+        if self.table.check_empty(fil, col) and self.table.check_nexto(memory[0], memory[1], fil, col):
             self.table.move_piece(memory[0], memory[1], fil, col)
             # Check if a mill has been built
-            self.memory = 0
-            self.modo = "Select"
             if self.table.check_mill(fil, col):
                 self.modo = "Remove"
+                return 0
             else:
                 self.change_turn()
-
-    def place_mode(self, fil, col):
-        # Check if a mill has been built if not change turn
-        if self.table.check_mill(fil, col):
-            self.modo = "Remove"
-        else:
-            self.change_turn()
+        self.modo = "Select"
 
     # This method show in the windows the player's number that is playing
     def turn_text(self):
@@ -135,9 +128,7 @@ class Game():
 
                 # Function to transformate from cartesian coordinate to rows and cols of a matrix 7x7
                 fil, col = get_row_col_from_mouse(mouse)
-
                 if fil >= 0 and col >= 0 and valid_boxes[fil][col]:
-                    print(self.modo)
                     # If the game is in Place Mode the player place pieces in the board and it checks if a mill has been build
                     if self.modo == "Place":
                         self.place_piece(fil, col)
@@ -148,6 +139,7 @@ class Game():
 
                     # In Select Mode the player select which piece of him he is going to move
                     elif self.modo == "Select":
+                        self.memory = 0
                         if self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and self.table.valid_place(fil, col):
                             self.memory = (fil, col)
                             self.modo = "Move"
@@ -155,4 +147,8 @@ class Game():
                     # Move Select just move the piece to the new place selected and check if a mill has ben built
                     elif self.modo == "Move":
                         self.move_piece(fil, col, self.memory)
+                    #print(fil, col)
+
+                    print(self.modo)
+
         return False

@@ -1,7 +1,7 @@
 from asyncio.windows_events import NULL
 import pygame
 from ficha import Piece
-from constants import valid_boxes, BLACK, SIZE, GREY, WHITE, RED
+from constants import valid_boxes, BLACK, SIZE, GREY, WHITE, RED, next_to_piece
 
 
 class Table():
@@ -9,14 +9,8 @@ class Table():
         self.board = []  # Fichas en juego
         self.remove = False  # Pinta las fichas que se pueden remover, si es True
         self.paint = NULL  # le damos el valor de lista de las fichas que se pueden remover
-
-    def setRemove(self, mode):
-        self.remove = mode
-
-    def set_list(self, list):
-        self.paint = list
-
     # Dibuja las posiciones válidas en el tablero
+
     def draw_box(self, screen):
         for fil in range(7):
             self.board.append([])
@@ -48,24 +42,10 @@ class Table():
                                          // 2, SIZE//2, width_line, SIZE*2))
         pygame.draw.rect(screen, BLACK, (SIZE*3 + SIZE
                                          // 2, 5*SIZE-SIZE//2, width_line, SIZE*2))
-    
-    #Resalta las piezas que se van a remover
-    def draw_pices_remove(self, screen):
-        row = 0
-        for fil in self.paint:
-            column = 0
-            for col in fil:
-                if col == 1:
-                    pygame.draw.circle(
-                        screen, RED, (column*SIZE + SIZE//2, row*SIZE + SIZE//2), 25)
-                column += 1
-            row += 1
 
     # Pinta la pantalla
     # AC 5.1
     def draw_screen(self, screen):
-        if self.remove:
-            self.draw_pices_remove(screen)
         self.draw_lines(screen)
         self.draw_box(screen)
         for fil in range(7):
@@ -74,7 +54,18 @@ class Table():
                 if piece != 0:
                     piece.draw(screen)
 
+    def check_nexto(self, fil, col, newfil, newcol):
+        colors = (GREY, WHITE)
+        #print("Espacios permitodos de "+str(fil)+","+str(col)+" son: ")
+        print(fil, col, "-", newfil, newcol)
+        for place in next_to_piece[(fil, col)]:
+            if newfil == place[0] and newcol == place[1]:
+                return True
+        return False
+
+        # print(len(self.next_to_piece[(0, 3)]))
     # This method checks for each places of the board if a mill has been built
+
     def check_mill(self, fil, col):
         colors = (GREY, WHITE)
         for color in colors:
