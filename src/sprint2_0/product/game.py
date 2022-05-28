@@ -75,7 +75,7 @@ class Game():
     # Historia de usuario 1
 
     def place_piece(self, fil, col):
-        if self.table.valid_place(fil, col) == True and self.table.check_empty(fil, col):
+        if self.table.valid_place(fil, col) == True and self.table.check_empty(fil, col) and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
             self.table.create_piece(fil, col, self.turn)
             self.pieces_left_add(1)
             self.check_mode()
@@ -141,7 +141,7 @@ class Game():
 
                 # If the game is in Place Mode the player place pieces in the board and it checks if a mill has been build
                 if self.modo == "Place":
-                    if fil >= 0 and col >= 0 and self.table.check_empty(fil, col) and self.table.valid_place(fil, col) and self.pieces_left():
+                    if fil >= 0 and col >= 0:
                         self.place_piece(fil, col)
                         # Check if a mill has been built if not change turn
                         if self.table.check_mill(fil, col):
