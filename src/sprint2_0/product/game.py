@@ -149,6 +149,4 @@ class Game():
                         self.move_piece(fil, col, self.memory)
                     #print(fil, col)
 
-                    print(self.modo)
-
         return False
