@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./src/sprint1_0/product",
+        "./src/sprint1_0/test"
+    ]
+}
