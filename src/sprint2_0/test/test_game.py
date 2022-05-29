@@ -93,6 +93,20 @@ class TestGame(unittest.TestCase):
         g.place_piece(0,1)
         self.assertFalse(g.table.board[0][1]!=0)
 
+    #First acceptance requirement for 2 user history
+    #Proving that you can't remove a piece from yours in your own turn
+
+    def test_move_piece1(self):
+        screen = pygame.display.set_mode([800, 800])
+        g=Game(screen)
+        g.update()
+        #Placing 2 pieces one next to other
+        g.place_piece(0,0)
+        g.place_piece(0,3)
+        #Trying to move the first piece to the place already the 2nd one is on
+        g.move_piece(0,3,(0,0))
+        #Expecting to return to select mode since there was no change
+        self.assertEqual("Select",g.modo)
 
     #Second acceptance requirement for 7 user history
     #Proving that you can remove a piece
@@ -103,11 +117,10 @@ class TestGame(unittest.TestCase):
         g.update()
         #Piece from GREY placed
         g.place_piece(2,2)
-        #Changing to WHITE
-        g.change_turn()
         #Proving if you can remove the piece of GREY while being in WHITE
         g.remove_piece(2,2)
         self.assertTrue(g.table.board[2][2] == 0)
+
 
     #First acceptance requirement for 7 user history
     #Proving that you can't remove a piece from yours in your own turn
@@ -118,6 +131,8 @@ class TestGame(unittest.TestCase):
         g.update()
         #Piece from GREY placed
         g.place_piece(2,2)
+        #Turn back to GREY
+        g.change_turn()
         #Trying to remove piece while being on GREY turn
         g.remove_piece(2,2)
         self.assertFalse(g.table.board[2][2] == 0)
@@ -131,9 +146,10 @@ class TestGame(unittest.TestCase):
         g.update()
         #Making a mill for GREY
         g.place_piece(0,0)
+        g.change_turn()
         g.place_piece(0,3)
+        g.change_turn()
         g.place_piece(0,6)
-        #Changing turn to WHITE
         g.change_turn()
         #Trying to remove a GREY piece that is on a mill while being on WHITE turn 
         g.remove_piece(0,0)

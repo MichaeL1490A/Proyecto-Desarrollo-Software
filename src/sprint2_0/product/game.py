@@ -75,7 +75,7 @@ class Game():
     # Historia de usuario 1
 
     def place_piece(self, fil, col):
-        if self.table.check_empty(fil, col) and self.pieces_left():
+        if self.table.check_empty(fil, col) and self.pieces_left() and valid_boxes[fil][col]:
             self.table.create_piece(fil, col, self.turn)
             self.pieces_left_add(1)
             self.check_mode()
