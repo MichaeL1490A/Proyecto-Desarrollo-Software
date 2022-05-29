@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import pygame
 from ficha import Piece
 from constants import valid_boxes, BLACK, SIZE, GREY, WHITE, RED, next_to_piece, case_of_mill
@@ -8,7 +7,7 @@ class Table():
     def __init__(self):
         self.board = []  # Fichas en juego
         self.remove = False  # Pinta las fichas que se pueden remover, si es True
-        self.paint = NULL  # le damos el valor de lista de las fichas que se pueden remover
+        self.paint = 0  # le damos el valor de lista de las fichas que se pueden remover
     # Dibuja las posiciones válidas en el tablero
 
     def draw_box(self, screen):

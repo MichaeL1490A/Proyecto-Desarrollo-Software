@@ -1,6 +1,3 @@
-from asyncio.windows_events import NULL
-from tabnanny import check
-from matplotlib.pyplot import table
 import pygame
 import sys
 from table import Table
