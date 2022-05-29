@@ -147,6 +147,6 @@ class Game():
                     # Move Select just move the piece to the new place selected and check if a mill has ben built
                     elif self.modo == "Move":
                         self.move_piece(fil, col, self.memory)
-                    #print(fil, col)
+                    print(fil, col)
 
         return False

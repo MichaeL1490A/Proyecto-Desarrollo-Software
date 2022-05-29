@@ -68,7 +68,7 @@ class Table():
             for i in case_of_mill[(fil, col)]:
                 if self.board[i[0][0]][i[0][1]].__repr__() == str(color) and self.board[i[1][0]][i[1][1]].__repr__() == str(color) and self.board[i[2][0]][i[2][1]].__repr__() == str(color):
                     return True
-            return False
+        return False
 
     # AC 1.1 1.2
 
