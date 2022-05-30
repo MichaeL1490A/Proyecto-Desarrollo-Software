@@ -1,6 +1,3 @@
-from asyncio.windows_events import NULL
-from tabnanny import check
-from matplotlib.pyplot import table
 import pygame
 import sys
 from table import Table
@@ -37,10 +34,18 @@ class Game():
         self.modo = "Place"
         self.memory = 0
 
+    def draw_pices_remove(self, screen):
+        for fil in range(7):
+            for col in range(7):
+                if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
+                    pygame.draw.circle(
+                        screen, RED, (col*SIZE + SIZE//2, fil*SIZE + SIZE//2), 25)
     # Historia de usuario 5
 
     # Update method shows the new actions that happen with the board game and the pieces in the GUI
     def update(self):
+        if self.modo == "Remove":
+            self.draw_pices_remove(screen)
         self.table.draw_screen(screen)
         pygame.display.update()
 
@@ -147,6 +152,4 @@ class Game():
                     # Move Select just move the piece to the new place selected and check if a mill has ben built
                     elif self.modo == "Move":
                         self.move_piece(fil, col, self.memory)
-                    print(fil, col)
-
         return False
