@@ -7,18 +7,6 @@ from product.game import *
 from product.constants import GREY, WHITE
 
 class TestGame(unittest.TestCase):
-    def test_cambiar_turno(self):
-        screen = pygame.display.set_mode([800, 800])
-        g = Game(screen)
-        g.change_turn()
-        self.assertEqual(g.turn, WHITE)
-
-    def test_cambiar_turno2(self):
-        screen = pygame.display.set_mode([800, 800])
-        g = Game(screen)
-        g.change_turn()
-        g.change_turn()
-        self.assertEqual(g.turn, GREY)
 
     def test_get_row_col_from_pos(self):
         row, col = get_row_col_from_mouse((500, 500))
@@ -210,3 +198,29 @@ class TestGame(unittest.TestCase):
         #Trying to remove a GREY piece that is on a mill while being on WHITE turn 
         g.remove_piece(0,0)
         self.assertFalse(g.table.board[0][0] == 0)
+
+    #First acceptance requirement for 7 user history
+    #When you are on turn of GREY and finish your move you change to WHITE
+
+    def test_change_turn1(self):
+        screen = pygame.display.set_mode([800, 800])
+        #You start on GREY
+        g = Game(screen)
+        #Trying to change turn to WHITE
+        g.change_turn()
+        #Proving
+        self.assertEqual(g.turn, WHITE)
+
+    #Seccond acceptance requirement for 7 user history
+    #When you are on turn of WHITE and finish your move you change to GREY
+
+    def test_change_turn2(self):
+        screen = pygame.display.set_mode([800, 800])
+        #You start on GREY
+        g = Game(screen)
+        #Changing turn to WHITE
+        g.change_turn()
+        #Trying to change turn to GREY
+        g.change_turn()
+        #Proving
+        self.assertEqual(g.turn, GREY)
