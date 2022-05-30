@@ -1,14 +1,11 @@
 import pygame
 from ficha import Piece
-from constants import valid_boxes, BLACK, SIZE, GREY, WHITE, RED, next_to_piece, case_of_mill
+from constants import valid_boxes, BLACK, SIZE, GREY, WHITE, next_to_piece, case_of_mill
 
 
 class Table():
     def __init__(self):
-        self.board = []  # Fichas en juego
-        self.remove = False  # Pinta las fichas que se pueden remover, si es True
-        self.paint = 0  # le damos el valor de lista de las fichas que se pueden remover
-    # Dibuja las posiciones válidas en el tablero
+        self.board = []  # Pieces in play
 
     def draw_box(self, screen):
         for fil in range(7):
@@ -19,7 +16,7 @@ class Table():
                     pygame.draw.circle(
                         screen, BLACK, (fil*SIZE + SIZE//2, col*SIZE + SIZE//2), 15)
 
-    # Dibuja las líneas de apoyo en el tablero
+    # Draw the support lines on the board
     def draw_lines(self, screen):
         width_line = 4
         for column in range(3):
@@ -42,7 +39,7 @@ class Table():
         pygame.draw.rect(screen, BLACK, (SIZE*3 + SIZE
                                          // 2, 5*SIZE-SIZE//2, width_line, SIZE*2))
 
-    # Pinta la pantalla
+    # Paint the screen
     # AC 5.1
     def draw_screen(self, screen):
         self.draw_lines(screen)
@@ -60,7 +57,6 @@ class Table():
         return False
 
     # This method checks for each places of the board if a mill has been built
-
     def check_mill(self, fil, col):
         colors = (GREY, WHITE)
         for color in colors:
@@ -70,14 +66,13 @@ class Table():
         return False
 
     # AC 1.1 1.2
-
     def check_empty(self, fil, col):
         if self.board[fil][col] == 0:
             return True
         else:
             return False
-    # AC 1.4
 
+    # AC 1.4
     def valid_place(self, fil, col):
         return valid_boxes[fil][col]
 

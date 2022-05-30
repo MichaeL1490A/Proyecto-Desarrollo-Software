@@ -34,14 +34,15 @@ class Game():
         self.modo = "Place"
         self.memory = 0
 
+    # Shows the tiles that can be removed when making a mill
     def draw_pices_remove(self, screen):
         for fil in range(7):
             for col in range(7):
                 if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
                     pygame.draw.circle(
                         screen, RED, (col*SIZE + SIZE//2, fil*SIZE + SIZE//2), 25)
-    # Historia de usuario 5
 
+    # Historia de usuario 5
     # Update method shows the new actions that happen with the board game and the pieces in the GUI
     def update(self):
         if self.modo == "Remove":
@@ -71,14 +72,13 @@ class Game():
             return False
 
     # This method helps to change the game mode
-
     def check_mode(self):
         if self.pieces > 0:
             self.modo = "Place"
         else:
             self.modo = "Select"
-    # Historia de usuario 1
 
+    # Historia de usuario 1
     def place_piece(self, fil, col):
         if self.table.check_empty(fil, col) and self.pieces_left() and valid_boxes[fil][col]:
             self.table.create_piece(fil, col, self.turn)
@@ -91,7 +91,6 @@ class Game():
                 self.change_turn()
 
     # Historia de usuario 7
-
     def remove_piece(self, fil, col):
         if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
             self.table.delete_piece(fil, col)
@@ -99,7 +98,6 @@ class Game():
             self.check_mode()
 
     # Historia de usuario 2
-
     def move_piece(self, fil, col, memory):
         if self.table.check_empty(fil, col) and self.table.check_nexto(memory[0], memory[1], fil, col):
             self.table.move_piece(memory[0], memory[1], fil, col)
@@ -120,7 +118,6 @@ class Game():
         screen.blit(text, [center_x, center_y])
 
     # Retorna una lista con las fichas que se pueden remover
-
     def process_events(self, screen):
         screen.fill(COLOR_TABLE)
         self.turn_text()
