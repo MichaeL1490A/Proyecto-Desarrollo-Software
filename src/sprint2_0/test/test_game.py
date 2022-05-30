@@ -94,7 +94,7 @@ class TestGame(unittest.TestCase):
         self.assertFalse(g.table.board[0][1]!=0)
 
     #First acceptance requirement for 2 user history
-    #Proving that you can't remove a piece from yours in your own turn
+    #Proving that you can't move a piece to a place that is already fill
 
     def test_move_piece1(self):
         screen = pygame.display.set_mode([800, 800])
@@ -105,6 +105,22 @@ class TestGame(unittest.TestCase):
         g.place_piece(0,3)
         #Trying to move the first piece to the place already the 2nd one is on
         g.move_piece(0,3,(0,0))
+        #Expecting to return to select mode since there was no change
+        self.assertEqual("Select",g.modo)
+
+    #Second acceptance requirement for 2 user history
+    #Proving that you can't move a piece to a place that is not next to you
+
+    def test_move_piece2(self):
+        screen = pygame.display.set_mode([800, 800])
+        g=Game(screen)
+        g.update()
+        #Placing a piece
+        g.place_piece(0,0)
+        #Back to GREY
+        g.change_turn()
+        #Trying to move the piece to a place outside of it's range to move
+        g.move_piece(0,0,(0,6))
         #Expecting to return to select mode since there was no change
         self.assertEqual("Select",g.modo)
 
