@@ -135,7 +135,7 @@ class TestGame(unittest.TestCase):
         self.assertTrue(g.table.board[0][6] != 0)
 
     #Fourth acceptance requirement for 2 user history
-    #Placing a piece and not doing a mill
+    #Moving a piece to a place outside of the table
 
     def test_move_piece4(self):
         screen = pygame.display.set_mode([800, 800])
@@ -146,10 +146,9 @@ class TestGame(unittest.TestCase):
         #Back to GREY
         g.change_turn()
         #Moving the piece to a valid place
-        g.move_piece(0,3,(0,0))
-        #Expecting we change turn and the place we moved is filled
-        self.assertEqual(WHITE,g.turn)
-        self.assertTrue(g.table.board[0][3] != 0)
+        g.move_piece(0,2,(0,0))
+        #Expecting to return to select mode since there was no change because is invalid
+        self.assertEqual("Select",g.modo)
         
 
     #Second acceptance requirement for 7 user history
