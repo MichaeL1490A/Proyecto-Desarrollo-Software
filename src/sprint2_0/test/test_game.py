@@ -120,9 +120,49 @@ class TestGame(unittest.TestCase):
         #Back to GREY
         g.change_turn()
         #Trying to move the piece to a place outside of it's range to move
-        g.move_piece(0,0,(0,6))
+        g.move_piece(0,6,(0,0))
         #Expecting to return to select mode since there was no change
         self.assertEqual("Select",g.modo)
+
+    #Third acceptance requirement for 2 user history
+    #Placing a piece and doing a mill
+
+    def test_move_piece3(self):
+        screen = pygame.display.set_mode([800, 800])
+        g=Game(screen)
+        g.update()
+        #Placing a piece
+        g.place_piece(0,0)
+        #Back to GREY
+        g.change_turn()
+        g.place_piece(0,3)
+        g.change_turn()
+        #Placing the piece we want to move to a mill
+        g.place_piece(3,6)
+        g.change_turn()
+        #Moving the piece to a place that does a mill
+        g.move_piece(0,6,(3,6))
+        #Expecting we change mode to Remove since we did a mill and that there is a piece on the place we moved the piece
+        self.assertEqual("Remove",g.modo)
+        self.assertTrue(g.table.board[0][6] != 0)
+
+    #Fourth acceptance requirement for 2 user history
+    #Placing a piece and not doing a mill
+
+    def test_move_piece4(self):
+        screen = pygame.display.set_mode([800, 800])
+        g=Game(screen)
+        g.update()
+        #Placing a piece
+        g.place_piece(0,0)
+        #Back to GREY
+        g.change_turn()
+        #Moving the piece to a valid place
+        g.move_piece(0,3,(0,0))
+        #Expecting we change turn and the place we moved is filled
+        self.assertEqual(WHITE,g.turn)
+        self.assertTrue(g.table.board[0][3] != 0)
+        
 
     #Second acceptance requirement for 7 user history
     #Proving that you can remove a piece
