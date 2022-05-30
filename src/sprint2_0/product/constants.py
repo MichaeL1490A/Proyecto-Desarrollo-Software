@@ -8,12 +8,13 @@ SIZE = SCREEN_WIDTH // COL
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
 # Colors
-GREY = (85, 81, 70)
+GREY = (105, 101, 90)
 WHITE = (240, 240, 240)
 BLACK = (0, 0, 0)
 COLOR_TABLE = (247, 205, 102)
 RED = (204, 0, 0)
-# Tabla de posiciones válidas
+
+# Table of valid positions
 valid_boxes = [
     [True, False, False, True, False, False, True],
     [False, True, False, True, False, True, False],
