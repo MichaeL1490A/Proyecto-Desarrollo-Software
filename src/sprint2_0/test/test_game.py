@@ -193,12 +193,11 @@ class TestGame(unittest.TestCase):
         g.place_piece(0,3)
         g.change_turn()
         g.place_piece(0,6)
-        g.change_turn()
         #Trying to remove a GREY piece that is on a mill while being on WHITE turn 
         g.remove_piece(0,0)
         self.assertFalse(g.table.board[0][0] == 0)
 
-    #First acceptance requirement for 7 user history
+    #First acceptance requirement for 4 user history
     #When you are on turn of GREY and finish your move you change to WHITE
 
     def test_change_turn1(self):
@@ -210,7 +209,7 @@ class TestGame(unittest.TestCase):
         #Proving
         self.assertEqual(g.turn, WHITE)
 
-    #Seccond acceptance requirement for 7 user history
+    #Seccond acceptance requirement for 4 user history
     #When you are on turn of WHITE and finish your move you change to GREY
 
     def test_change_turn2(self):
@@ -223,3 +222,5 @@ class TestGame(unittest.TestCase):
         g.change_turn()
         #Proving
         self.assertEqual(g.turn, GREY)
+
+        
