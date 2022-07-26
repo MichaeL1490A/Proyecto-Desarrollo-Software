@@ -12,6 +12,7 @@ class Piece():
         self.color = color
         self.x = 0
         self.y = 0
+        self.movement = False
         self.calculate_position()
 
     def calculate_position(self):
@@ -22,6 +23,9 @@ class Piece():
         self.fil = fil
         self.col = col
         self.calculate_position()
+
+    def advance_movement(self):
+        self.movement = True
 
     def draw(self, screen):
         pygame.draw.circle(screen, self.color, (self.x, self.y), 20)
