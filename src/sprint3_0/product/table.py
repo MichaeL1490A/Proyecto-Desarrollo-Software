@@ -1,5 +1,5 @@
 import pygame
-from ficha import Piece
+from piece import Piece
 from constants import valid_boxes, BLACK, SIZE, GREY, WHITE, next_to_piece, case_of_mill
 
 

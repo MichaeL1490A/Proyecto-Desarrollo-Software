@@ -3,7 +3,7 @@ import unittest
 import sys
 sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software\src\sprint2_0")
-from product.ficha import Piece
+from product.piece import Piece
 from product.table import *
 
 

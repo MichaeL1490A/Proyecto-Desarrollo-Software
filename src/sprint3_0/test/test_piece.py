@@ -1,11 +1,11 @@
 import unittest
 import sys
 sys.path.append(
-    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software\src\sprint2_0\product")
-from constants import SIZE, GREY
-from ficha import Piece
+    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software - Test\src\sprint3_0\product")
+from product.constants import SIZE, GREY
+from product.piece import Piece
 
-class TestFicha(unittest.TestCase):
+class TestPiece(unittest.TestCase):
     def test_calcular_posicion(self):
         a = Piece(3, 2, GREY)
         x = 285

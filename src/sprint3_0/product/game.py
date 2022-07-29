@@ -4,7 +4,7 @@ from table import Table
 from constants import valid_boxes, BLACK, GREY, screen, SIZE, COLOR_TABLE, WHITE, RED
 
 sys.path.append(
-    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software")
+    "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software - Test")
 
 
 # Function to transform from cartesian coordinate
@@ -33,9 +33,11 @@ class Game():
         self.pieces = 18
         self.modo = "Place"
         self.memory = 0
+        self.grey = 0
+        self.white = 0
 
     # Shows the tiles that can be removed when making a mill
-    def draw_pices_remove(self, screen):
+    def draw_pieces_remove(self, screen):
         for fil in range(7):
             for col in range(7):
                 if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
@@ -46,7 +48,7 @@ class Game():
     # Update method shows the new actions that happen with the board game and the pieces in the GUI
     def update(self):
         if self.modo == "Remove":
-            self.draw_pices_remove(screen)
+            self.draw_pieces_remove(screen)
         self.table.draw_screen(screen)
         pygame.display.update()
 
@@ -64,6 +66,18 @@ class Game():
     def pieces_left_add(self, num):
         self.pieces = self.pieces - num
 
+    def pieces_add_color(self):
+        if self.turn == GREY:
+            self.grey +=1
+        else:
+            self.white +=1
+
+    def pieces_del_color(self):
+        if self.turn == GREY:
+            self.white -=1
+        else:
+            self.grey -=1
+
     # This method checks remaining pieces
     def pieces_left(self):
         if self.pieces > 0:
@@ -73,7 +87,7 @@ class Game():
 
     # This method helps to change the game mode
     def check_mode(self):
-        if self.pieces > 0:
+        if self.pieces_left():
             self.modo = "Place"
         else:
             self.modo = "Select"
@@ -83,6 +97,7 @@ class Game():
         if self.table.check_empty(fil, col) and self.pieces_left() and valid_boxes[fil][col]:
             self.table.create_piece(fil, col, self.turn)
             self.pieces_left_add(1)
+            self.pieces_add_color()
             self.check_mode()
             # Check if a mill has been built if not change turn
             if self.table.check_mill(fil, col):
@@ -94,20 +109,47 @@ class Game():
     def remove_piece(self, fil, col):
         if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
             self.table.delete_piece(fil, col)
+            self.pieces_del_color()
             self.change_turn()
             self.check_mode()
+            self.winner()
 
     # Historia de usuario 2
     def move_piece(self, fil, col, memory):
-        if self.table.check_empty(fil, col) and self.table.check_nexto(memory[0], memory[1], fil, col):
-            self.table.move_piece(memory[0], memory[1], fil, col)
-            # Check if a mill has been built
-            if self.table.check_mill(fil, col):
-                self.modo = "Remove"
-                return 0
-            else:
-                self.change_turn()
+        if (self.turn == GREY and self.grey > 3) or (self.turn == WHITE and self.white > 3):
+            if self.table.check_empty(fil, col) and self.table.check_nexto(memory[0], memory[1], fil, col):
+                self.table.move_piece(memory[0], memory[1], fil, col)
+                # Check if a mill has been built
+                if self.table.check_mill(fil, col):
+                    self.modo = "Remove"
+                    return 0
+                else:
+                    self.change_turn()
+        elif (self.turn == GREY and self.grey == 3) or (self.turn == WHITE and self.white == 3):
+            if self.table.check_empty(fil, col):
+                self.table.move_piece(memory[0], memory[1], fil, col)
+                # Check if a mill has been built
+                if self.table.check_mill(fil, col):
+                    self.modo = "Remove"
+                    return 0
+                else:
+                    self.change_turn()
         self.modo = "Select"
+
+    def winner(self):
+        if self.grey == 2 and self.pieces == 0:
+            self.modo = "Win"
+            self.change_turn()
+        elif self.white == 2 and self.pieces == 0:
+            self.modo = "Win"
+            self.change_turn()
+
+    def winner_text(self):
+        font = pygame.font.SysFont("serif", 20)
+        text = font.render("JUGADOR "+self.player+" GANA", True, BLACK)
+        center_x = SIZE*3 + SIZE//2 - text.get_width()//2
+        center_y = 20 - text.get_height()//2
+        screen.blit(text, [center_x, center_y])   
 
     # This method show in the windows the player's number that is playing
     def turn_text(self):
@@ -120,7 +162,10 @@ class Game():
     # Retorna una lista con las fichas que se pueden remover
     def process_events(self, screen):
         screen.fill(COLOR_TABLE)
-        self.turn_text()
+        if not self.modo == "Win":
+            self.turn_text()
+        elif self.modo == "Win":
+            self.winner_text()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return True
@@ -149,4 +194,7 @@ class Game():
                     # Move Select just move the piece to the new place selected and check if a mill has ben built
                     elif self.modo == "Move":
                         self.move_piece(fil, col, self.memory)
+
+                    elif self.modo == "Win":
+                        pass
         return False
