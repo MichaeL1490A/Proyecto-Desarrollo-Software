@@ -1,39 +1,12 @@
 import pygame
 from Piece import Piece
 from Constant import C
+from Print import Print
 
 
 class Table():
     def __init__(self):
         self.board = []  # Pieces in play
-
-    def draw_positions_valids_of_game(self, screen):
-        for fil in range(7):
-            self.board.append([])
-            for col in range(7):
-                self.board[fil].append(0)
-                if C.valid_boxes[fil][col] == True:
-                    pygame.draw.circle(
-                        screen, C.BLACK, (fil*C.SIZE + C.SIZE//2, col*C.SIZE + C.SIZE//2), 15)
-
-    # Draw the support lines on the board
-    def draw_lines_of_game(self, screen):
-        for line in game_lines:
-            pygame.draw.rect(screen, BLACK, line)
-
-    # Draw the pieces in game
-    def draw_pieces_in_game(self, screen):
-        for fil in range(7):
-            for col in range(7):
-                piece = self.board[fil][col]
-                if piece != 0:
-                    piece.draw(screen)
-
-    # AC 5.1: Paint the screen
-    def draw_screen(self, screen):
-        self.draw_lines_of_game(screen)
-        self.draw_positions_valids_of_game(screen)
-        self.draw_pieces_in_game(screen)
 
     # Check if the move is a consecutive position
     def check_nexto(self, fil, col, newfil, newcol):

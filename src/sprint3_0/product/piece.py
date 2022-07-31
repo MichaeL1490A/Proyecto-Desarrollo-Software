@@ -21,6 +21,7 @@ class Piece():
         self.fil = fil
         self.col = col
         self.calculate_position()
+
     def __repr__(self):
         return str(self.color)
         """

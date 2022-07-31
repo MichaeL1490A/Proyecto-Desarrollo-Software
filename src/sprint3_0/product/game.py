@@ -2,6 +2,7 @@ import pygame
 import sys
 from Table import Table
 from Constant import C
+from Print import Print
 
 sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software - Test")
@@ -47,7 +48,7 @@ class Game():
     def update(self):
         if self.modo == "Remove":
             self.draw_pieces_remove(C.screen)
-        self.table.draw_screen(C.screen)
+        Print.draw_screenq(C.screen, self.table.board, )
         pygame.display.update()
 
     # This method changes the turn to its opponent
