@@ -47,11 +47,11 @@ class Table():
         return False
 
     # AC 1.1 1.2: Check if the box where you want to put the pieces is empty
-    def check_empty(self, fil, col):
+    def isSpaceAvailable(self, fil, col):
         return self.board[fil][col] == 0
 
     # AC 1.4
-    def valid_place(self, fil, col):
+    def isSpaceOnBoard(self, fil, col):
         return C.valid_boxes[fil][col]
 
     def create_piece(self, fil, col, turn):

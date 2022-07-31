@@ -6,7 +6,7 @@ sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software - Test")
 
 
-class Piece(Constant):
+class Piece():
     def __init__(self, fil, col, color):
         self.fil = fil
         self.col = col

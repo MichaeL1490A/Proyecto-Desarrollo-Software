@@ -8,8 +8,6 @@ class NineMenMorris:
         A=AppRunner()
         A.run()
 
-
-
 if __name__ == "__main__":
     game = NineMenMorris()
     game.main()
