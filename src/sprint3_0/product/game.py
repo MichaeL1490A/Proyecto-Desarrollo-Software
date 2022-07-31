@@ -39,7 +39,7 @@ class Game():
     def draw_pieces_remove(self, screen):
         for fil in range(7):
             for col in range(7):
-                if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.isSpaceAvailable(fil, col) and not self.table.check_mill(fil, col):
+                if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.is_space_available(fil, col) and not self.table.check_mill(fil, col):
                     pygame.draw.circle(
                         screen, C.RED, (col*C.SIZE + C.SIZE//2, fil*C.SIZE + C.SIZE//2), 25)
 
@@ -86,7 +86,7 @@ class Game():
 
     # User history 1: This method adds a piece to the board
     def place_piece(self, fil, col):
-        if self.table.isSpaceAvailable(fil, col) and self.remaining_pieces() and self.table.isSpaceOnBoard(fil, col):
+        if self.table.is_space_available(fil, col) and self.remaining_pieces() and self.table.is_space_on_board(fil, col):
             self.table.create_piece(fil, col, self.turn)
             self.decrease_remaining_pieces(1)
             self.add_pieces_by_color()
@@ -95,7 +95,7 @@ class Game():
 
     # User history 7: This method removes a piece
     def remove_piece(self, fil, col):
-        if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.isSpaceAvailable(fil, col) and not self.table.check_mill(fil, col):
+        if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.is_space_available(fil, col) and not self.table.check_mill(fil, col):
             self.table.delete_piece(fil, col)
             self.delete_pieces_by_color()
             self.change_turn()
@@ -105,7 +105,7 @@ class Game():
     # User history 2: This method moves one piece
     def move_piece(self, fil, col, memory):
         if (self.turn == C.GREY and self.grey > 3) or (self.turn == C.WHITE and self.white > 3):
-            if self.table.isSpaceAvailable(fil, col) and self.table.check_nexto(memory[0], memory[1], fil, col):
+            if self.table.is_space_available(fil, col) and self.table.check_nexto(memory[0], memory[1], fil, col):
                 self.table.move_piece(memory[0], memory[1], fil, col)
                 if self.table.check_mill(fil, col):
                     self.modo = "Remove"
@@ -113,7 +113,7 @@ class Game():
                 else:
                     self.change_turn()
         elif (self.turn == C.GREY and self.grey == 3) or (self.turn == C.WHITE and self.white == 3):
-            if self.table.isSpaceAvailable(fil, col):
+            if self.table.is_space_available(fil, col):
                 self.table.move_piece(memory[0], memory[1], fil, col)
                 if self.table.check_mill(fil, col):
                     self.modo = "Remove"
@@ -160,7 +160,7 @@ class Game():
                 # Function to transformate from cartesian coordinate to rows and cols of a matrix 7x7
                 fil, col = get_row_col_from_mouse(mouse)
 
-                if fil >= 0 and col >= 0 and self.table.isSpaceOnBoard(fil, col):
+                if fil >= 0 and col >= 0 and self.table.is_space_on_board(fil, col):
                     # If the game is in Place Mode the player place pieces in the board and it checks if a mill has been build
                     if self.modo == "Place":
                         self.place_piece(fil, col)
@@ -172,7 +172,7 @@ class Game():
                     # In Select Mode the player select which piece of him he is going to move
                     elif self.modo == "Select":
                         self.memory = 0
-                        if self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.isSpaceAvailable(fil, col) and self.table.isSpaceOnBoard(fil, col):
+                        if self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.is_space_available(fil, col) and self.table.is_space_on_board(fil, col):
                             self.memory = (fil, col)
                             self.modo = "Move"
 

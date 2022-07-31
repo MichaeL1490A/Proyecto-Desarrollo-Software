@@ -109,7 +109,7 @@ class Game():
                 self.change_turn()
         self.modo = "Select"
 
-    # This method show in the windows the player's number that is playing
+    # This method shows on the screen whose turn it is
     def turn_text(self):
         font = pygame.font.SysFont("serif", 20)
         text = font.render("JUGADOR "+self.player, True, BLACK)
