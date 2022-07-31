@@ -1,5 +1,5 @@
 from Constant import C
-from game import Game
+from Game import Game
 import pygame
 import pygame_menu
 

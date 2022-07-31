@@ -1,5 +1,5 @@
 import pygame
-from piece import Piece
+from Piece import Piece
 from Constant import C
 
 class Table():

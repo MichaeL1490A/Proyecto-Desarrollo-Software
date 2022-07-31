@@ -1,4 +1,3 @@
-from ast import Constant
 import pygame
 
 class C():
