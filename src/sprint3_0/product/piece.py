@@ -1,11 +1,12 @@
+from ast import Constant
 import pygame
+from Constant import C
 import sys
-from constants import SIZE
 sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software - Test")
 
 
-class Piece():
+class Piece(Constant):
     def __init__(self, fil, col, color):
         self.fil = fil
         self.col = col
@@ -15,8 +16,8 @@ class Piece():
         self.calculate_position()
 
     def calculate_position(self):
-        self.x = SIZE*self.col + SIZE//2
-        self.y = SIZE*self.fil + SIZE//2
+        self.x = C.SIZE*self.col + C.SIZE//2
+        self.y = C.SIZE*self.fil + C.SIZE//2
 
     def move(self, fil, col):
         self.fil = fil
