@@ -15,6 +15,8 @@ class C():
     BLACK = (0, 0, 0)
     COLOR_TABLE = (247, 205, 102)
     RED = (204, 0, 0)
+    GREEN = (0, 150, 0)
+    BLUE = (0, 0, 200)
 
     # List of positions valid in the board.
     valid_boxes = [

@@ -1,3 +1,4 @@
+from statistics import mode
 import pygame
 import sys
 from Table import Table
@@ -122,35 +123,47 @@ class Game():
                 self.modo = "Win"
                 self.change_turn()
 
-    # This method shows the winner of the game
-    def winner_text(self):
-        font = pygame.font.SysFont("serif", 20)
-        jugador = "NEGRO" if self.turn == C.GREY else "BLANCO"
-        text = font.render("JUGADOR "+jugador+" GANA", True, C.BLACK)
-        center_x = C.SIZE*3 + C.SIZE//2 - text.get_width()//2
-        center_y = 20 - text.get_height()//2
-        C.screen.blit(text, [center_x, center_y])
+    # Shows the status of the game on the screen
+    def text_in_screen(self):
+        font = pygame.font.SysFont("serif", 25, bold=True)
 
-    # This method displays at the top of the screen, the player's turn.
-    def turn_text(self):
-        font = pygame.font.SysFont("serif", 20)
-        jugador = "NEGRO" if self.turn == C.GREY else "BLANCO"
-        text = font.render("JUGADOR "+jugador, True, C.BLACK)
-        center_x = C.SIZE*3 + C.SIZE//2 - text.get_width()//2
-        center_y = 20 - text.get_height()//2
-        C.screen.blit(text, [center_x, center_y])
+        if self.modo == "Place":
+            game_action = "COLOCA"
+            color_action = C.GREEN
+        elif self.modo == "Remove":
+            game_action = "COME"
+            color_action = C.RED
+        elif self.modo == "Select" or self.modo == "Move":
+            game_action = "MUEVE"
+            color_action = C.BLUE
+        elif self.modo == "Win":
+            game_action = "VENCE"
+            color_action = C.GREEN
 
-    # Retorna una lista con las fichas que se pueden remover
+        action_screen = font.render(game_action, True, color_action)
+        center_x = C.SIZE*2.85 - action_screen.get_width()//2
+        center_y = 19 - action_screen.get_height()//2
+        C.screen.blit(action_screen, [center_x, center_y])
+
+        font = pygame.font.SysFont("serif", 20, bold=True)
+        player = "NEGRO" if self.turn == C.GREY else "BLANCO"
+        player_screen = font.render(" EL JUGADOR "+player, True, C.BLACK)
+        center_x = C.SIZE*3.8 + C.SIZE//2 - player_screen.get_width()//2
+        center_y = 20 - player_screen.get_height()//2
+        C.screen.blit(player_screen, [center_x, center_y])
+
+    # Constantly called method for the game process
     def process_events(self, screen):
         screen.fill(C.COLOR_TABLE)
-        self.turn_text() if not self.modo == "Win" else self.winner_text()
+        self.text_in_screen()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # Get the mouse pos in cartesian coordinate of the windows
                 mouse = pygame.mouse.get_pos()
-                # Function to transformate from cartesian coordinate to rows and cols of a matrix 7x7
+                # We convert the mouse coordinates to positions of board
                 fil, col = get_row_col_from_mouse(mouse)
 
                 if fil >= 0 and col >= 0 and self.table.is_space_on_board(fil, col):
