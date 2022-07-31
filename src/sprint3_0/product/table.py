@@ -65,12 +65,9 @@ class Table():
                     return True
         return False
 
-    # AC 1.1 1.2
+    # AC 1.1 1.2: Check if the box where you want to put the pieces is empty
     def check_empty(self, fil, col):
-        if self.board[fil][col] == 0:
-            return True
-        else:
-            return False
+        return self.board[fil][col] == 0
 
     # AC 1.4
     def valid_place(self, fil, col):

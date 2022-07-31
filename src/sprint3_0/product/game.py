@@ -61,42 +61,38 @@ class Game():
             self.turn = GREY
             self.player = "1"
 
-    # AC 1.3
-    # This method subtracts the pieces each time the player place a pieces in baord
-    def pieces_left_add(self, num):
+    # AC 1.3: This method subtracts the remaining pieces each time the player places a piece on the board
+    def decrease_remaining_pieces(self, num):
         self.pieces = self.pieces - num
 
     def pieces_add_color(self):
         if self.turn == GREY:
-            self.grey +=1
+            self.grey += 1
         else:
-            self.white +=1
+            self.white += 1
 
     def pieces_del_color(self):
         if self.turn == GREY:
-            self.white -=1
+            self.white -= 1
         else:
-            self.grey -=1
+            self.grey -= 1
 
     # This method checks remaining pieces
-    def pieces_left(self):
-        if self.pieces > 0:
-            return True
-        else:
-            return False
+    def remaining_pieces(self):
+        return self.pieces > 0
 
     # This method helps to change the game mode
     def check_mode(self):
-        if self.pieces_left():
+        if self.remaining_pieces():
             self.modo = "Place"
         else:
             self.modo = "Select"
 
     # Historia de usuario 1
     def place_piece(self, fil, col):
-        if self.table.check_empty(fil, col) and self.pieces_left() and valid_boxes[fil][col]:
+        if self.table.check_empty(fil, col) and self.remaining_pieces() and valid_boxes[fil][col]:
             self.table.create_piece(fil, col, self.turn)
-            self.pieces_left_add(1)
+            self.decrease_remaining_pieces(1)
             self.pieces_add_color()
             self.check_mode()
             # Check if a mill has been built if not change turn
@@ -146,15 +142,17 @@ class Game():
 
     def winner_text(self):
         font = pygame.font.SysFont("serif", 20)
-        text = font.render("JUGADOR "+self.player+" GANA", True, BLACK)
+        jugador = "NEGRO" if self.player == "1" else "BLANCO"
+        text = font.render("JUGADOR "+jugador+" GANA", True, BLACK)
         center_x = SIZE*3 + SIZE//2 - text.get_width()//2
         center_y = 20 - text.get_height()//2
-        screen.blit(text, [center_x, center_y])   
+        screen.blit(text, [center_x, center_y])
 
-    # This method show in the windows the player's number that is playing
+    # This method displays at the top of the screen, the player's turn.
     def turn_text(self):
         font = pygame.font.SysFont("serif", 20)
-        text = font.render("JUGADOR "+self.player, True, BLACK)
+        jugador = "NEGRO" if self.player == "1" else "BLANCO"
+        text = font.render("JUGADOR "+jugador, True, BLACK)
         center_x = SIZE*3 + SIZE//2 - text.get_width()//2
         center_y = 20 - text.get_height()//2
         screen.blit(text, [center_x, center_y])
@@ -162,19 +160,17 @@ class Game():
     # Retorna una lista con las fichas que se pueden remover
     def process_events(self, screen):
         screen.fill(COLOR_TABLE)
-        if not self.modo == "Win":
-            self.turn_text()
-        elif self.modo == "Win":
-            self.winner_text()
+        self.turn_text() if not self.modo == "Win" else self.winner_text()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # Get the mouse pos in cartesian coordinate of the windows
                 mouse = pygame.mouse.get_pos()
-
                 # Function to transformate from cartesian coordinate to rows and cols of a matrix 7x7
                 fil, col = get_row_col_from_mouse(mouse)
+
                 if fil >= 0 and col >= 0 and valid_boxes[fil][col]:
                     # If the game is in Place Mode the player place pieces in the board and it checks if a mill has been build
                     if self.modo == "Place":

@@ -8,6 +8,7 @@ sys.path.append(
 
 def main():
     pygame.init()
+    pygame.display.set_caption("Nine Men's Morris")
     screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
     done = False
     clock = pygame.time.Clock()

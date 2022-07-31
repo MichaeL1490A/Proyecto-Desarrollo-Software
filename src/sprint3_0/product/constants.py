@@ -14,7 +14,7 @@ BLACK = (0, 0, 0)
 COLOR_TABLE = (247, 205, 102)
 RED = (204, 0, 0)
 
-# Table of valid positions
+# List of positions valid in the board.
 valid_boxes = [
     [True, False, False, True, False, False, True],
     [False, True, False, True, False, True, False],
@@ -25,6 +25,7 @@ valid_boxes = [
     [True, False, False, True, False, False, True],
 ]
 
+# Dictionary of the valid adjacent points of each point of the board
 next_to_piece = {
     (0, 0): [[0, 3], [3, 0]],
     (0, 3): [[0, 0], [0, 6], [1, 3]],
@@ -51,6 +52,8 @@ next_to_piece = {
     (4, 2): [[4, 3], [3, 2]],
     (3, 2): [[4, 2], [2, 2], [3, 1]]
 }
+
+# Dictionary of all the possible ways to make a mill
 case_of_mill = {
     # (0, 0):[[[0, 0],[0, 0]],[[0, 3],[3, 0]],[[0, 6],[6, 0]]]
     (0, 0): [[[0, 0], [0, 3], [0, 6]], [[0, 0], [3, 0], [6, 0]]],
