@@ -1,7 +1,6 @@
 import pygame
 from Piece import Piece
 from Constant import C
-from Print import Print
 
 
 class Table():
@@ -28,7 +27,7 @@ class Table():
     def is_space_available(self, fil, col):
         return self.board[fil][col] == 0
 
-    # AC 1.4
+    # AC 1.4: Check if the position is valid
     def is_space_on_board(self, fil, col):
         return C.valid_boxes[fil][col]
 

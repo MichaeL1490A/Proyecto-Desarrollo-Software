@@ -36,19 +36,11 @@ class Game():
         self.grey = 0
         self.white = 0
 
-    # Shows the pieces that can be removed when making a mill
-    def draw_pieces_remove(self, screen):
-        for fil in range(7):
-            for col in range(7):
-                if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.is_space_available(fil, col) and not self.table.check_mill(fil, col):
-                    pygame.draw.circle(
-                        screen, C.RED, (col*C.SIZE + C.SIZE//2, fil*C.SIZE + C.SIZE//2), 25)
-
     # User history 5: This method shows the new actions that happen with the board game and the pieces in the GUI
     def update(self):
         if self.modo == "Remove":
-            self.draw_pieces_remove(C.screen)
-        Print.draw_screenq(C.screen, self.table.board, )
+            Print.draw_pieces_remove(C.screen, self.table, self.turn)
+        Print.draw_screen(C.screen, self.table.board)
         pygame.display.update()
 
     # This method changes the turn to its opponent

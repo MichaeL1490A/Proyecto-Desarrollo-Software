@@ -24,7 +24,3 @@ class Piece():
 
     def __repr__(self):
         return str(self.color)
-        """
-    def draw(self, screen):
-        pygame.draw.circle(screen, self.color, (self.x, self.y), 20)
-"""

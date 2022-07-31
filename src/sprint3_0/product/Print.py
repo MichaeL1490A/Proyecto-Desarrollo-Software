@@ -31,9 +31,18 @@ class Print():
                 if piece != 0:
                     self.draw_pieces(self, screen, piece)
 
-    @classmethod
     # AC 5.1: Paint the screen
-    def draw_screenq(self, screen, board):
+    @classmethod
+    def draw_screen(self, screen, board):
         self.draw_lines_of_game(self, screen)
         self.draw_positions_valids_of_game(self, screen, board)
         self.draw_pieces_in_game(self, screen, board)
+
+    # Shows the pieces that can be removed when making a mill
+    @classmethod
+    def draw_pieces_remove(self, screen, table, turn):
+        for fil in range(7):
+            for col in range(7):
+                if not table.board[fil][col].__repr__() == str(turn) and not table.is_space_available(fil, col) and not table.check_mill(fil, col):
+                    pygame.draw.circle(
+                        screen, C.RED, (col*C.SIZE + C.SIZE//2, fil*C.SIZE + C.SIZE//2), 25)
