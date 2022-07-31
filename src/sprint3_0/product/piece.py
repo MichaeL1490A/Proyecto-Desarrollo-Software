@@ -1,5 +1,3 @@
-from ast import Constant
-import pygame
 from Constant import C
 import sys
 sys.path.append(
@@ -23,9 +21,9 @@ class Piece():
         self.fil = fil
         self.col = col
         self.calculate_position()
-
-    def draw(self, screen):
-        pygame.draw.circle(screen, self.color, (self.x, self.y), 20)
-
     def __repr__(self):
         return str(self.color)
+        """
+    def draw(self, screen):
+        pygame.draw.circle(screen, self.color, (self.x, self.y), 20)
+"""
