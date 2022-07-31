@@ -18,8 +18,8 @@ class Table():
 
     # Draw the support lines on the board
     def draw_lines_of_game(self, screen):
-        for line in game_lines:
-            pygame.draw.rect(screen, BLACK, line)
+        for line in C.game_lines:
+            pygame.draw.rect(screen, C.BLACK, line)
 
     # Draw the pieces in game
     def draw_pieces_in_game(self, screen):
