@@ -1,6 +1,6 @@
 import pygame
 from piece import Piece
-from constants import valid_boxes, BLACK, SIZE, GREY, WHITE, next_to_piece, case_of_mill
+from constants import valid_boxes, BLACK, SIZE, GREY, WHITE, next_to_piece, case_of_mill, game_lines
 
 
 class Table():
@@ -18,26 +18,8 @@ class Table():
 
     # Draw the support lines on the board
     def draw_lines(self, screen):
-        width_line = 4
-        for column in range(3):
-            pygame.draw.rect(screen, BLACK, (column*SIZE + SIZE
-                                             // 2, column*SIZE + SIZE//2, width_line, SIZE*7 - 2*(column*SIZE + SIZE//2)))
-            pygame.draw.rect(screen, BLACK, (7*SIZE - (1+column)*SIZE+SIZE//2, column
-                                             * SIZE + SIZE//2, width_line, SIZE*7 - 2*(column*SIZE + SIZE//2)))
-        for row in range(3):
-            pygame.draw.rect(screen, BLACK, (row*SIZE + SIZE
-                                             // 2, row*SIZE + SIZE//2, SIZE*7 - 2*(row*SIZE + SIZE//2), width_line))
-            pygame.draw.rect(screen, BLACK, (row*SIZE + SIZE//2, 7*SIZE - (row
-                                             * SIZE + SIZE//2), SIZE*7 - 2*(row*SIZE + SIZE//2), width_line))
-
-        pygame.draw.rect(screen, BLACK, (SIZE//2, SIZE
-                                         * 3 + SIZE//2, SIZE*2, width_line))
-        pygame.draw.rect(screen, BLACK, (SIZE//2+SIZE
-                                         * 4, SIZE*3 + SIZE//2, SIZE*2, width_line))
-        pygame.draw.rect(screen, BLACK, (SIZE*3 + SIZE
-                                         // 2, SIZE//2, width_line, SIZE*2))
-        pygame.draw.rect(screen, BLACK, (SIZE*3 + SIZE
-                                         // 2, 5*SIZE-SIZE//2, width_line, SIZE*2))
+        for line in game_lines:
+            pygame.draw.rect(screen, BLACK, line)
 
     # Paint the screen
     # AC 5.1

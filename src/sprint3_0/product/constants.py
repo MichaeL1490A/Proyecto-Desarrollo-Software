@@ -81,3 +81,30 @@ case_of_mill = {
     (4, 2): [[[4, 2], [3, 2], [2, 2]], [[4, 2], [4, 3], [4, 4]]],
     (3, 2): [[[3, 2], [4, 2], [2, 2]], [[3, 2], [3, 1], [3, 0]]],
 }
+
+# Game frame
+width_line = 4
+game_lines = [
+    (0*SIZE + SIZE//2, 0*SIZE + SIZE//2, width_line, SIZE*7 - 2*(0*SIZE + SIZE//2)),
+    (1*SIZE + SIZE//2, 1*SIZE + SIZE//2, width_line, SIZE*7 - 2*(1*SIZE + SIZE//2)),
+    (2*SIZE + SIZE//2, 2*SIZE + SIZE//2, width_line, SIZE*7 - 2*(2*SIZE + SIZE//2)),
+    (7*SIZE - (1+0)*SIZE + SIZE//2, 0*SIZE + SIZE //
+     2, width_line, SIZE*7 - 2*(0*SIZE + SIZE//2)),
+    (7*SIZE - (1+1)*SIZE + SIZE//2, 1*SIZE + SIZE //
+     2, width_line, SIZE*7 - 2*(1*SIZE + SIZE//2)),
+    (7*SIZE - (1+2)*SIZE + SIZE//2, 2*SIZE + SIZE //
+     2, width_line, SIZE*7 - 2*(2*SIZE + SIZE//2)),
+    (0*SIZE + SIZE//2, 0*SIZE + SIZE//2, SIZE*7 - 2*(0*SIZE + SIZE//2), width_line),
+    (1*SIZE + SIZE//2, 1*SIZE + SIZE//2, SIZE*7 - 2*(1*SIZE + SIZE//2), width_line),
+    (2*SIZE + SIZE//2, 2*SIZE + SIZE//2, SIZE*7 - 2*(2*SIZE + SIZE//2), width_line),
+    (0*SIZE + SIZE//2, 7*SIZE - (0*SIZE + SIZE//2),
+     SIZE*7 - 2*(0*SIZE + SIZE//2), width_line),
+    (1*SIZE + SIZE//2, 7*SIZE - (1*SIZE + SIZE//2),
+     SIZE*7 - 2*(1*SIZE + SIZE//2), width_line),
+    (2*SIZE + SIZE//2, 7*SIZE - (2*SIZE + SIZE//2),
+     SIZE*7 - 2*(2*SIZE + SIZE//2), width_line),
+    (SIZE//2, SIZE*3 + SIZE//2, SIZE*2, width_line),
+    (SIZE//2 + SIZE*4, SIZE*3 + SIZE//2, SIZE*2, width_line),
+    (SIZE*3 + SIZE//2, SIZE//2, width_line, SIZE*2),
+    (SIZE*3 + SIZE // 2, 5*SIZE-SIZE//2, width_line, SIZE*2)
+]
