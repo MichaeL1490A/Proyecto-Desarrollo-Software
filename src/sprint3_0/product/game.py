@@ -29,14 +29,13 @@ class Game():
     def _init(self):
         self.table = Table()
         self.turn = GREY
-        self.player = "1"
         self.pieces = 18
         self.modo = "Place"
         self.memory = 0
         self.grey = 0
         self.white = 0
 
-    # Shows the tiles that can be removed when making a mill
+    # Shows the pieces that can be removed when making a mill
     def draw_pieces_remove(self, screen):
         for fil in range(7):
             for col in range(7):
@@ -44,8 +43,7 @@ class Game():
                     pygame.draw.circle(
                         screen, RED, (col*SIZE + SIZE//2, fil*SIZE + SIZE//2), 25)
 
-    # Historia de usuario 5
-    # Update method shows the new actions that happen with the board game and the pieces in the GUI
+    # User history 5: This method shows the new actions that happen with the board game and the pieces in the GUI
     def update(self):
         if self.modo == "Remove":
             self.draw_pieces_remove(screen)
@@ -54,28 +52,21 @@ class Game():
 
     # This method changes the turn to its opponent
     def change_turn(self):
-        if self.turn == GREY:
-            self.turn = WHITE
-            self.player = "2"
-        else:
-            self.turn = GREY
-            self.player = "1"
+        self.turn = WHITE if self.turn == GREY else GREY
 
     # AC 1.3: This method subtracts the remaining pieces each time the player places a piece on the board
     def decrease_remaining_pieces(self, num):
         self.pieces = self.pieces - num
 
-    def pieces_add_color(self):
-        if self.turn == GREY:
-            self.grey += 1
-        else:
-            self.white += 1
+    # Increase the number of pieces we have by color
+    def add_pieces_by_color(self):
+        self.grey += 1 * int(self.turn == GREY)
+        self.white += 1 * int(self.turn == WHITE)
 
-    def pieces_del_color(self):
-        if self.turn == GREY:
-            self.white -= 1
-        else:
-            self.grey -= 1
+    # Reduce the number of pieces per color
+    def delete_pieces_by_color(self):
+        self.grey -= 1 * int(self.turn == WHITE)
+        self.white -= 1 * int(self.turn == GREY)
 
     # This method checks remaining pieces
     def remaining_pieces(self):
@@ -83,39 +74,39 @@ class Game():
 
     # This method helps to change the game mode
     def check_mode(self):
-        if self.remaining_pieces():
-            self.modo = "Place"
-        else:
-            self.modo = "Select"
+        self.modo = "Place" if self.remaining_pieces() else "Select"
 
-    # Historia de usuario 1
+    # Check if a mill has been built if not change turn
+    def check_mill_to_set_game_mode(self, fil, col):
+        if self.table.check_mill(fil, col):
+            self.modo = "Remove"
+            return 0
+        else:
+            self.change_turn()
+
+    # User history 1: This method adds a piece to the board
     def place_piece(self, fil, col):
         if self.table.check_empty(fil, col) and self.remaining_pieces() and valid_boxes[fil][col]:
             self.table.create_piece(fil, col, self.turn)
             self.decrease_remaining_pieces(1)
-            self.pieces_add_color()
+            self.add_pieces_by_color()
             self.check_mode()
-            # Check if a mill has been built if not change turn
-            if self.table.check_mill(fil, col):
-                self.modo = "Remove"
-            else:
-                self.change_turn()
+            self.check_mill_to_set_game_mode(fil, col)
 
-    # Historia de usuario 7
+    # User history 7: This method removes a piece
     def remove_piece(self, fil, col):
         if not self.table.board[fil][col].__repr__() == str(self.turn) and not self.table.check_empty(fil, col) and not self.table.check_mill(fil, col):
             self.table.delete_piece(fil, col)
-            self.pieces_del_color()
+            self.delete_pieces_by_color()
             self.change_turn()
             self.check_mode()
             self.winner()
 
-    # Historia de usuario 2
+    # User history 2: This method moves one piece
     def move_piece(self, fil, col, memory):
         if (self.turn == GREY and self.grey > 3) or (self.turn == WHITE and self.white > 3):
             if self.table.check_empty(fil, col) and self.table.check_nexto(memory[0], memory[1], fil, col):
                 self.table.move_piece(memory[0], memory[1], fil, col)
-                # Check if a mill has been built
                 if self.table.check_mill(fil, col):
                     self.modo = "Remove"
                     return 0
@@ -124,7 +115,6 @@ class Game():
         elif (self.turn == GREY and self.grey == 3) or (self.turn == WHITE and self.white == 3):
             if self.table.check_empty(fil, col):
                 self.table.move_piece(memory[0], memory[1], fil, col)
-                # Check if a mill has been built
                 if self.table.check_mill(fil, col):
                     self.modo = "Remove"
                     return 0
@@ -132,17 +122,17 @@ class Game():
                     self.change_turn()
         self.modo = "Select"
 
+    # This method calculates the winner of the game
     def winner(self):
-        if self.grey == 2 and self.pieces == 0:
-            self.modo = "Win"
-            self.change_turn()
-        elif self.white == 2 and self.pieces == 0:
-            self.modo = "Win"
-            self.change_turn()
+        if self.pieces == 0:
+            if self.grey == 2 or self.white == 2:
+                self.modo = "Win"
+                self.change_turn()
 
+    # This method shows the winner of the game
     def winner_text(self):
         font = pygame.font.SysFont("serif", 20)
-        jugador = "NEGRO" if self.player == "1" else "BLANCO"
+        jugador = "NEGRO" if self.turn == GREY else "BLANCO"
         text = font.render("JUGADOR "+jugador+" GANA", True, BLACK)
         center_x = SIZE*3 + SIZE//2 - text.get_width()//2
         center_y = 20 - text.get_height()//2
@@ -151,7 +141,7 @@ class Game():
     # This method displays at the top of the screen, the player's turn.
     def turn_text(self):
         font = pygame.font.SysFont("serif", 20)
-        jugador = "NEGRO" if self.player == "1" else "BLANCO"
+        jugador = "NEGRO" if self.turn == GREY else "BLANCO"
         text = font.render("JUGADOR "+jugador, True, BLACK)
         center_x = SIZE*3 + SIZE//2 - text.get_width()//2
         center_y = 20 - text.get_height()//2
