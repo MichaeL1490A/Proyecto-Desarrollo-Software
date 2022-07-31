@@ -82,7 +82,7 @@ case_of_mill = {
     (3, 2): [[[3, 2], [4, 2], [2, 2]], [[3, 2], [3, 1], [3, 0]]],
 }
 
-# Game frame
+# Game lines
 width_line = 4
 game_lines = [
     (0*SIZE + SIZE//2, 0*SIZE + SIZE//2, width_line, SIZE*7 - 2*(0*SIZE + SIZE//2)),
