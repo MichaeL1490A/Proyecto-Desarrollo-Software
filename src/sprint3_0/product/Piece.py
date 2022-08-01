@@ -1,5 +1,6 @@
 from Constant import C
 import sys
+
 sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software - Test")
 

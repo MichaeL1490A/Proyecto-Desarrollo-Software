@@ -8,20 +8,10 @@ from Print import Print
 sys.path.append(
     "D:\Programas\Pygame\Proyecto Software\Proyecto-Desarrollo-Software - Test")
 
-
-# Function to transform from cartesian coordinate
-# system to a matrix of 7x7 that represent the board game
-def get_row_col_from_mouse(pos):
-    x, y = pos
-    circle_diameter = 20
-    row = (y - C.SIZE//2 + circle_diameter) // C.SIZE
-    col = (x - C.SIZE//2 + circle_diameter) // C.SIZE
-    return row, col
-
-
 # Class Game() has the job to run the logic of the program as
 # when turn has to change, also when place, move, remove pieces
 # And always check if a mill has been created
+
 
 class Game():
     def __init__(self, screen):
@@ -123,39 +113,10 @@ class Game():
                 self.modo = "Win"
                 self.change_turn()
 
-    # Shows the status of the game on the screen
-    def text_in_screen(self):
-        font = pygame.font.SysFont("serif", 25, bold=True)
-
-        if self.modo == "Place":
-            game_action = "COLOCA"
-            color_action = C.GREEN
-        elif self.modo == "Remove":
-            game_action = "COME"
-            color_action = C.RED
-        elif self.modo == "Select" or self.modo == "Move":
-            game_action = "MUEVE"
-            color_action = C.BLUE
-        elif self.modo == "Win":
-            game_action = "VENCE"
-            color_action = C.GREEN
-
-        action_screen = font.render(game_action, True, color_action)
-        center_x = C.SIZE*2.85 - action_screen.get_width()//2
-        center_y = 19 - action_screen.get_height()//2
-        C.screen.blit(action_screen, [center_x, center_y])
-
-        font = pygame.font.SysFont("serif", 20, bold=True)
-        player = "NEGRO" if self.turn == C.GREY else "BLANCO"
-        player_screen = font.render(" EL JUGADOR "+player, True, C.BLACK)
-        center_x = C.SIZE*3.8 + C.SIZE//2 - player_screen.get_width()//2
-        center_y = 20 - player_screen.get_height()//2
-        C.screen.blit(player_screen, [center_x, center_y])
-
     # Constantly called method for the game process
     def process_events(self, screen):
         screen.fill(C.COLOR_TABLE)
-        self.text_in_screen()
+        Print.text_in_screen(self.modo, self.turn)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -189,3 +150,14 @@ class Game():
                     elif self.modo == "Win":
                         pass
         return False
+
+# Function to transform from cartesian coordinate
+# system to a matrix of 7x7 that represent the board game
+
+
+def get_row_col_from_mouse(pos):
+    x, y = pos
+    circle_diameter = 20
+    row = (y - C.SIZE//2 + circle_diameter) // C.SIZE
+    col = (x - C.SIZE//2 + circle_diameter) // C.SIZE
+    return row, col

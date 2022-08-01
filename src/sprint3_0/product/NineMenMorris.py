@@ -5,6 +5,7 @@ sys.path.append(
 
 
 class NineMenMorris:
+
     def main(self):
         A = AppRunner()
         A.run()

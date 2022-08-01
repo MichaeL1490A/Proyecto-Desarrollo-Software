@@ -15,7 +15,7 @@ class AppRunner():
         while not done:
             done = game.process_events(C.screen)
             game.update()
-            clock.tick(60)
+            clock.tick(1000)
         self.quitApp
 
     def quitApp():
